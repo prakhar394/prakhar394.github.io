@@ -4,339 +4,229 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Prakhar Dungarwal • AI & Data Science</title>
-  <meta name="description" content="Prakhar Dungarwal — MS Data Science @ Columbia. LLMs, Agentic AI, RAG, Applied ML."/>
+  <meta name="description" content="Prakhar Dungarwal — MS Data Science @ Columbia. Building impactful AI systems with LLMs, Agentic AI, and Applied Machine Learning."/>
+  <link rel="icon" type="image/png" href="https://www.google.com/s2/favicons?domain=columbia.edu" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Inter','ui-sans-serif','system-ui'] },
-          colors: {
-            brand: { 500: '#2563EB', 600: '#1D4ED8' },
-            neon: { 500: '#22d3ee' },
-            mag: '#a855f7'
-          },
-          boxShadow: {
-            glow: '0 0 25px rgba(99,102,241,0.35)',
-            soft: '0 12px 30px rgba(2,12,27,0.10)'
-          }
-        }
-      }
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <style>
+    :root {
+      --brand-primary: #2563EB;
+      --brand-secondary: #1D4ED8;
+      --highlight: #22d3ee;
+      --accent: #a855f7;
     }
-  </script>
-  <style>
-    .grad-text { background: linear-gradient(90deg,#2563EB,#22d3ee,#a855f7); -webkit-background-clip: text; color: transparent; }
-    .glass { background: rgba(255,255,255,0.65); backdrop-filter: blur(10px); border:1px solid rgba(255,255,255,0.45); }
-    .dark .glass { background: rgba(2,6,23,0.55); border-color: rgba(148,163,184,0.25); }
-    .tilt { transform-style: preserve-3d; transition: transform .15s ease; }
-    .tilt:hover { transform: perspective(800px) rotateX(3deg) rotateY(-4deg); }
-    .reveal { opacity: 0; transform: translateY(18px); transition: all .7s ease; }
+    .grad-text { background: linear-gradient(90deg, var(--brand-primary), var(--highlight), var(--accent)); -webkit-background-clip: text; color: transparent; }
+    .glass { background: rgba(255,255,255,0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.5); }
+    .dark .glass { background: rgba(2,6,23,0.65); border-color: rgba(148,163,184,0.25); }
+    .reveal { opacity: 0; transform: translateY(20px); transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
     .reveal.show { opacity: 1; transform: translateY(0); }
-    .blink { animation: blink 4s infinite; }
-    @keyframes blink {0%,2%,60%,100%{transform:translateY(0)}1%{transform:translateY(3px)}}
-    .trail { position: fixed; top:0; left:0; width:8px; height:8px; border-radius:9999px; pointer-events:none; mix-blend-mode:screen; background: radial-gradient(circle at center, #22d3ee, transparent 70%); opacity: .65 }
-    #particles { position:absolute; inset:0; z-index:0 }
-    .download-btn { background: linear-gradient(90deg,#2563EB,#a855f7); }
+    .btn-primary { background: linear-gradient(90deg, var(--brand-primary), var(--accent)); box-shadow: 0 4px 15px rgba(37,99,235,0.3); }
+    .tag { display: inline-block; background-color: #e0f2fe; color: #0c4a6e; padding: 2px 8px; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; }
+    .dark .tag { background-color: #1e293b; color: #94a3b8; }
   </style>
 </head>
-<body class="bg-white text-slate-900 antialiased">
+<body class="bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
 
-  <!-- Navbar -->
-  <nav class="fixed top-0 w-full backdrop-blur bg-white/80 z-50 border-b border-slate-200">
+  <nav class="fixed top-0 w-full backdrop-blur-lg bg-white/80 dark:bg-slate-950/80 z-50 border-b border-slate-200 dark:border-slate-800">
     <div class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
-      <a href="#home" class="text-xl font-extrabold grad-text">Prakhar D.</a>
-      <div class="hidden md:flex gap-6 font-medium">
-        <a href="#about" class="hover:text-brand-600">About</a>
-        <a href="#experience" class="hover:text-brand-600">Experience</a>
-        <a href="#projects" class="hover:text-brand-600">Projects</a>
-        <a href="#skills" class="hover:text-brand-600">Skills</a>
-        <a href="#education" class="hover:text-brand-600">Education</a>
-        <a href="#contact" class="hover:text-brand-600">Contact</a>
+      <a href="#home" class="text-xl font-extrabold grad-text">Prakhar Dungarwal</a>
+      <div class="hidden md:flex items-center gap-6 font-medium text-sm">
+        <a href="#experience" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">Experience</a>
+        <a href="#projects" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">Projects</a>
+        <a href="#skills" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">Skills</a>
+        <a href="#contact" class="px-3 py-1.5 rounded-full text-white btn-primary hover:opacity-90 transition-opacity">Contact</a>
       </div>
-      <button id="mode" title="Toggle theme" class="px-2 py-1 rounded-lg border border-slate-200">🌙</button>
+       <button id="mode" title="Toggle theme" class="px-2 py-1 rounded-lg border border-slate-300 dark:border-slate-700 text-lg">🌙</button>
     </div>
   </nav>
 
-  <!-- Hero / About -->
-  <header id="home" class="relative overflow-hidden">
-    <canvas id="particles"></canvas>
-    <section class="max-w-6xl mx-auto px-5 pt-28 pb-16 grid md:grid-cols-12 gap-8 items-center relative z-10">
-      <div class="md:col-span-7 reveal show">
-        <h1 class="text-5xl md:text-6xl font-black leading-tight">Crafting <span class="grad-text">AI-powered</span> systems that reason & scale.</h1>
-        <p class="mt-4 text-lg text-slate-600">I’m <strong>Prakhar Dungarwal</strong>, MS Data Science @ Columbia. I build <b>LLM-based</b>, <b>agentic</b> & <b>applied ML</b> solutions with production impact.</p>
-        <p id="typeline" class="mt-3 text-brand-600 font-semibold"></p>
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a href="#projects" class="px-4 py-2 rounded-xl text-white download-btn shadow-glow hover:opacity-90">Explore Projects</a>
-          <a href="#contact" class="px-4 py-2 rounded-xl border border-slate-300 hover:bg-slate-50">Contact</a>
-          <a href="/resume.pdf" class="px-4 py-2 rounded-xl border border-slate-300 hover:bg-slate-50">Download Resume</a>
-        </div>
-        <div class="mt-4 text-sm text-slate-500">NY, USA • (917) 217-8276 • <a class="underline" href="mailto:pd2782@columbia.edu">pd2782@columbia.edu</a></div>
-        <div class="mt-2 flex gap-4 text-sm">
-          <a href="https://www.linkedin.com/in/prakhardungarwal/">LinkedIn</a>
-          <a href="https://www.datascienceportfol.io/prakhar_dungarwal">Portfolio</a>
-          <a href="https://github.com/prakhar394">GitHub</a>
-        </div>
+  <header id="home" class="max-w-6xl mx-auto px-5 pt-32 pb-20 flex md:flex-row flex-col items-center gap-8">
+    <div class="md:w-2/3 text-center md:text-left reveal show">
+      <h1 class="text-4xl md:text-6xl font-black leading-tight">I build <span class="grad-text">intelligent systems</span> that deliver business value.</h1>
+      <p class="mt-5 text-lg text-slate-600 dark:text-slate-400">
+        Hi, I’m Prakhar. A Data Scientist and Researcher at <strong>Columbia University</strong>, passionate about creating production-ready AI solutions. My work focuses on <strong>Agentic AI</strong>, <strong>RAG systems</strong>, and <strong>Applied Machine Learning</strong> to solve complex, real-world problems.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3 justify-center md:justify-start">
+        <a href="#projects" class="px-5 py-3 rounded-xl text-white font-semibold btn-primary hover:opacity-90 transition-opacity">View My Work</a>
+        <a href="resume.pdf" target="_blank" class="px-5 py-3 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Download Resume</a>
       </div>
-      <div class="md:col-span-5 relative">
-        <div class="absolute -top-6 -left-6 w-40 h-40 rounded-full blur-3xl opacity-50" style="background:radial-gradient(circle, var(--glowC), transparent 70%)"></div>
-        <div class="relative glass rounded-2xl p-6 border shadow-glow tilt">
-          <img src="https://avatars.githubusercontent.com/u/14235555?v=4" alt="Prakhar headshot" class="w-56 h-56 rounded-full object-cover mx-auto border-4 border-white shadow-soft"/>
-          <div class="mt-4 text-center text-sm">💬 <span class="blink">&ldquo;</span>Let’s build intelligent agents!<span class="blink">&rdquo;</span></div>
-          <img alt="coding person" class="absolute -right-4 -bottom-4 w-20 select-none" src="https://cdn-icons-png.flaticon.com/512/4712/4712103.png"/>
-        </div>
-      </div>
-    </section>
+    </div>
+    <div class="md:w-1/3 relative reveal show">
+      <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full blur-3xl opacity-30 dark:opacity-20"></div>
+      <img src="https://avatars.githubusercontent.com/u/14235555?v=4" alt="Prakhar Dungarwal headshot" class="relative w-64 h-64 rounded-full object-cover mx-auto border-4 border-white dark:border-slate-900 shadow-xl"/>
+    </div>
   </header>
 
-  <div class="h-px bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200"></div>
+  <section id="experience" class="py-20 bg-slate-100 dark:bg-slate-900">
+    <div class="max-w-6xl mx-auto px-5">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-center grad-text reveal">Career Journey</h2>
+      <div class="mt-12 grid md:grid-cols-2 gap-8">
+        <article class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-md reveal">
+          <h3 class="text-xl font-bold">AI & Data Science Intern @ Intuit</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400">May 2025 – Present • Mountain View, CA</p>
+          <ul class="mt-3 text-sm text-slate-700 dark:text-slate-300 list-disc pl-5 space-y-1">
+            <li>Developed an Agentic AI framework (<strong>LangGraph & ReAct</strong>) that reduced ground-truth annotation time by <strong>50%</strong>.</li>
+            <li>Improved business metric extraction recall by <strong>30%</strong> using <strong>GPT-4.5</strong> and an LLM-as-a-Judge evaluation framework.</li>
+          </ul>
+        </article>
+        <article class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-md reveal">
+          <h3 class="text-xl font-bold">AI & ML Researcher @ Columbia Climate School</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400">Aug 2024 – Present • New York, NY</p>
+          <ul class="mt-3 text-sm text-slate-700 dark:text-slate-300 list-disc pl-5 space-y-1">
+            <li>Fine-tuning a <strong>RoBERTa</strong> model for emotion classification to reduce non-peaceful content consumption on YouTube by a target of <strong>30%</strong>.</li>
+            <li>Engineered and deployed a scalable backend on <strong>AWS (S3, EC2)</strong> using LangChain for a Chrome Extension.</li>
+          </ul>
+        </article>
+        <article class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-md reveal">
+          <h3 class="text-xl font-bold">Senior Data Scientist @ Morgan Stanley</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400">Jan 2024 – Aug 2024 • Bengaluru, IN</p>
+          <ul class="mt-3 text-sm text-slate-700 dark:text-slate-300 list-disc pl-5 space-y-1">
+            <li>Spearheaded a <strong>RAG chatbot</strong> using LLaMA-3.1, cutting query resolution time by <strong>60%</strong> and saving <strong>30%</strong> in annual op-ex.</li>
+            <li>Boosted forecasting accuracy by <strong>20%</strong> with a hybrid CNN/Prophet model, leading to <strong>$1M in cost savings</strong>.</li>
+          </ul>
+        </article>
+        <article class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-md reveal">
+          <h3 class="text-xl font-bold">Data Scientist @ Morgan Stanley</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400">Aug 2022 – Jan 2024 • Bengaluru, IN</p>
+          <ul class="mt-3 text-sm text-slate-700 dark:text-slate-300 list-disc pl-5 space-y-1">
+            <li>Trained ML models that reduced annual data center energy spend by <strong>20%</strong>.</li>
+            <li>Automated ESG metric extraction using <strong>spaCy, Tesseract, and OpenCV</strong>, cutting analysis time by <strong>50%</strong>.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
 
-  <!-- Experience -->
-  <section id="experience" class="max-w-6xl mx-auto px-5 py-14">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-center grad-text reveal">Experience</h2>
-    <div class="mt-8 grid md:grid-cols-2 gap-6">
-      <!-- Intuit -->
-      <article class="p-6 rounded-2xl border border-slate-200 bg-white shadow-soft tilt reveal">
-        <div class="flex justify-between items-start flex-wrap">
-          <h3 class="text-xl font-bold">Intuit — AI & Data Science Intern</h3>
-          <span class="text-xs text-slate-500">May 2025 – Present • Mountain View, CA</span>
+  <section id="projects" class="py-20">
+    <div class="max-w-6xl mx-auto px-5">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-center grad-text reveal">Featured Projects</h2>
+      <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-lg reveal">
+          <h3 class="text-lg font-bold">YouTube Emotion Analyzer Chrome Extension</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">A browser extension that analyzes video transcripts to classify content based on emotions like respect vs. contempt, aiming to promote healthier content consumption.</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="tag">RoBERTa</span><span class="tag">GPT-4o</span><span class="tag">AWS</span><span class="tag">LangChain</span><span class="tag">Chrome Ext.</span>
+          </div>
+          <div class="mt-4 flex gap-3 text-sm">
+            <a href="[LINK_TO_GITHUB]" target="_blank" class="font-semibold text-blue-600 dark:text-cyan-400 hover:underline">GitHub →</a>
+            <a href="[LINK_TO_DEMO_OR_PAPER]" target="_blank" class="font-semibold text-blue-600 dark:text-cyan-400 hover:underline">Live Demo →</a>
+          </div>
         </div>
-        <ul class="mt-3 text-sm text-slate-700 list-disc pl-5">
-          <li>Built agentic systems using <strong>LangGraph</strong> + <strong>ReAct</strong>, cutting data labeling by <strong>50%</strong>.</li>
-          <li>Used <strong>GPT-4.5</strong> & <strong>Claude-3.5</strong> for LLM-as-Judge logic, boosting recall 30%.</li>
-          <li>Optimized pipelines with <strong>PyTorch</strong> + <strong>TensorRT</strong> for real-world deployment.</li>
-        </ul>
-      </article>
-      <!-- Columbia AC4 -->
-      <article class="p-6 rounded-2xl border border-slate-200 bg-white shadow-soft tilt reveal">
-        <div class="flex justify-between items-start flex-wrap">
-          <h3 class="text-xl font-bold">Columbia University — AI & ML Researcher (AC4 Lab)</h3>
-          <span class="text-xs text-slate-500">Aug 2024 – Present • New York, NY</span>
+
+        <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-lg reveal">
+          <h3 class="text-lg font-bold">CineGraphRAG Movie Recommender</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">A ReAct agent using a knowledge graph (Neo4j) to provide explainable movie recommendations from natural language queries, boosting query accuracy by 40%.</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="tag">LangGraph</span><span class="tag">ReAct Agent</span><span class="tag">Neo4j</span><span class="tag">GPT-4</span><span class="tag">RAG</span>
+          </div>
+           <div class="mt-4 flex gap-3 text-sm">
+            <a href="[LINK_TO_GITHUB]" target="_blank" class="font-semibold text-blue-600 dark:text-cyan-400 hover:underline">GitHub →</a>
+          </div>
         </div>
-        <ul class="mt-3 text-sm text-slate-700 list-disc pl-5">
-          <li>Fine-tuned <strong>RoBERTa</strong> & <strong>DeepSeek-R1</strong> for emotion classification; reduced non-peaceful content 30%.</li>
-          <li>Built inference backend on <strong>AWS + LangChain</strong> to scale model access.</li>
-        </ul>
-      </article>
-      <!-- Morgan Stanley senior -->
-      <article class="p-6 rounded-2xl border border-slate-200 bg-white shadow-soft tilt reveal">
-        <div class="flex justify-between items-start flex-wrap">
-          <h3 class="text-xl font-bold">Morgan Stanley — Senior Data Scientist</h3>
-          <span class="text-xs text-slate-500">Jan 2024 – Aug 2024 • Bengaluru, IN</span>
+        
+        <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-lg reveal">
+          <h3 class="text-lg font-bold">Handwritten Text Recognition (CRNN)</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">A CRNN-LSTM model trained on the IAM Dataset to automate the assessment of handwritten papers, achieving 91% accuracy and outperforming HMM models by 20%.</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="tag">PyTorch</span><span class="tag">CRNN</span><span class="tag">LSTM</span><span class="tag">OpenCV</span><span class="tag">Published Paper</span>
+          </div>
+           <div class="mt-4 flex gap-3 text-sm">
+            <a href="[LINK_TO_GITHUB]" target="_blank" class="font-semibold text-blue-600 dark:text-cyan-400 hover:underline">GitHub →</a>
+            <a href="[LINK_TO_PUBLICATION]" target="_blank" class="font-semibold text-blue-600 dark:text-cyan-400 hover:underline">Publication →</a>
+          </div>
         </div>
-        <ul class="mt-3 text-sm text-slate-700 list-disc pl-5">
-          <li>Deployed <b>RAG chatbot</b> (LLaMA-3.1-8B + mpnet), reducing query time 60%, cost 30%.</li>
-          <li>Hybrid forecasting (CNN + Prophet + ES) → accuracy +20%, saved $1M.</li>
-          <li>Latency tuning & model parallelization using PyTorch + CUDA.</li>
-        </ul>
-      </article>
-      <!-- Morgan Stanley earlier -->
-      <article class="p-6 rounded-2xl border border-slate-200 bg-white shadow-soft tilt reveal">
-        <div class="flex justify-between items-start flex-wrap">
-          <h3 class="text-xl font-bold">Morgan Stanley — Data Scientist</h3>
-          <span class="text-xs text-slate-500">Aug 2022 – Jan 2024 • Bengaluru, IN</span>
+        
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="py-20 bg-slate-100 dark:bg-slate-900">
+    <div class="max-w-6xl mx-auto px-5">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-center grad-text reveal">Technical Toolbox</h2>
+        <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div class="reveal">
+                <h4 class="text-lg font-bold">Languages & Databases</h4>
+                <p class="mt-2 text-slate-600 dark:text-slate-400 text-sm">Python, SQL, R, C++, Go, AWS, Azure, Snowpark</p>
+            </div>
+            <div class="reveal">
+                <h4 class="text-lg font-bold">AI/ML Concepts</h4>
+                <p class="mt-2 text-slate-600 dark:text-slate-400 text-sm">Generative AI, Agentic AI, RAG, Reinforcement Learning, NLP, Time Series, MLOps</p>
+            </div>
+            <div class="reveal">
+                <h4 class="text-lg font-bold">LLM Frameworks</h4>
+                <p class="mt-2 text-slate-600 dark:text-slate-400 text-sm">LangChain, LlamaIndex, Hugging Face, OpenAI API, Transformers</p>
+            </div>
+             <div class="reveal">
+                <h4 class="text-lg font-bold">ML Libraries</h4>
+                <p class="mt-2 text-slate-600 dark:text-slate-400 text-sm">PyTorch, TensorFlow, Scikit-learn, XGBoost, PySpark, JAX</p>
+            </div>
         </div>
-        <ul class="mt-3 text-sm text-slate-700 list-disc pl-5">
-          <li>ML systems for data center optimization → energy cost down 20%.</li>
-          <li>Document intelligence via spaCy + OpenCV + Tesseract; extraction accuracy up 50%.</li>
-        </ul>
-      </article>
     </div>
   </section>
 
-  <div class="h-px bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200"></div>
-
-  <!-- Projects with links -->
-  <section id="projects" class="max-w-6xl mx-auto px-5 py-14">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-center grad-text reveal">Projects</h2>
-    <div class="mt-8 grid md:grid-cols-3 gap-6">
-      <article class="p-6 rounded-2xl border border-slate-200 bg-white shadow-soft tilt reveal">
-        <h3 class="text-lg font-bold">CART — Context-Aware Rendition</h3>
-        <p class="mt-2 text-sm text-slate-700">QA chatbot combining contextual embeddings and transformer reasoning, improving inference by 30%.</p>
-        <a href="https://www.datascienceportfol.io/prakhar_dungarwal" target="_blank" class="inline-block mt-3 text-brand-500 hover:underline">Read more</a>
-      </article>
-      <article class="p-6 rounded-2xl border border-slate-200 bg-white shadow-soft tilt reveal">
-        <h3 class="text-lg font-bold">Handwritten Text Recognition (CRNN)</h3>
-        <p class="mt-2 text-sm text-slate-700">CRNN model for handwritten texts; automated grading with ~91% accuracy.</p>
-        <a href="https://www.datascienceportfol.io/prakhar_dungarwal" target="_blank" class="inline-block mt-3 text-brand-500 hover:underline">Read more</a>
-      </article>
-      <article class="p-6 rounded-2xl border border-slate-200 bg-white shadow-soft tilt reveal">
-        <h3 class="text-lg font-bold">BRSR Parser / ESG Reports</h3>
-        <p class="mt-2 text-sm text-slate-700">Parser for sustainability (BRSR) reports using NLP & computer vision, accelerating metrics evaluation.</p>
-        <a href="https://www.datascienceportfol.io/prakhar_dungarwal" target="_blank" class="inline-block mt-3 text-brand-500 hover:underline">Read more</a>
-      </article>
-    </div>
-  </section>
-
-  <div class="h-px bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200"></div>
-
-  <!-- Analytics / Stats Section -->
-  <section id="analytics" class="max-w-6xl mx-auto px-5 py-14 bg-gray-50">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-center grad-text reveal">Analytics & Insights</h2>
-    <div class="mt-10 grid md:grid-cols-2 gap-8">
-      <div class="p-6 rounded-2xl border bg-white shadow-soft tilt reveal">
-        <h3 class="font-semibold mb-2 text-lg">Page Views & Visitors</h3>
-        <div class="h-48 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">[analytics chart placeholder]</div>
+  <section id="contact" class="py-20">
+    <div class="max-w-xl mx-auto px-5 text-center reveal">
+      <h2 class="text-3xl md:text-4xl font-extrabold grad-text">Let's Build Together</h2>
+      <p class="mt-4 text-slate-600 dark:text-slate-400">I'm actively seeking new opportunities and collaborations where I can leverage my skills in AI and data science to create impactful solutions. Feel free to reach out!</p>
+      <div class="mt-8">
+        <a href="mailto:pd2782@columbia.edu" class="inline-block px-8 py-4 rounded-xl text-white font-semibold btn-primary hover:opacity-90 transition-opacity text-lg">
+          Email Me: pd2782@columbia.edu
+        </a>
       </div>
-      <div class="p-6 rounded-2xl border bg-white shadow-soft tilt reveal">
-        <h3 class="font-semibold mb-2 text-lg">Top Used Technologies</h3>
-        <div class="h-48 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">[tech usage chart]</div>
+      <div class="mt-6 flex justify-center gap-6">
+        <a href="https://www.linkedin.com/in/prakhardungarwal/" target="_blank" class="text-slate-500 hover:text-blue-600 dark:hover:text-cyan-400">LinkedIn</a>
+        <span>•</span>
+        <a href="https://github.com/prakhar394" target="_blank" class="text-slate-500 hover:text-blue-600 dark:hover:text-cyan-400">GitHub</a>
+        <span>•</span>
+        <a href="https://www.datascienceportfol.io/prakhar_dungarwal" target="_blank" class="text-slate-500 hover:text-blue-600 dark:hover:text-cyan-400">Full Portfolio</a>
       </div>
     </div>
   </section>
 
-  <div class="h-px bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200"></div>
-
-  <!-- Skills -->
-  <section id="skills" class="max-w-6xl mx-auto px-5 py-14">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-center grad-text reveal">Skills & Toolbox</h2>
-    <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="p-6 rounded-2xl border bg-white shadow-soft tilt reveal">
-        <h4 class="font-semibold text-brand-600">Programming & Tools</h4>
-        <p class="text-sm mt-2">Python, SQL, R, C, C++, Go, Docker, Git, Streamlit, AWS, Azure, Snowpark, Pandas, NumPy</p>
-      </div>
-      <div class="p-6 rounded-2xl border bg-white shadow-soft tilt reveal">
-        <h4 class="font-semibold text-brand-600">Specialized Techniques</h4>
-        <p class="text-sm mt-2">Machine Learning, AI Agents, Reinforcement Learning, LLMs, A/B Testing, RAG, Generative AI</p>
-      </div>
-      <div class="p-6 rounded-2xl border bg-white shadow-soft tilt reveal">
-        <h4 class="font-semibold text-brand-600">LLM Tools & Frameworks</h4>
-        <p class="text-sm mt-2">LangChain, LlamaIndex, OpenAI API, Hugging Face, ChromaDB, FAISS, Streamlit, Transformers</p>
-      </div>
-      <div class="p-6 rounded-2xl border bg-white shadow-soft tilt reveal">
-        <h4 class="font-semibold text-brand-600">ML Frameworks</h4>
-        <p class="text-sm mt-2">PyTorch, TensorFlow, scikit-learn, Keras, Random Forest, XGBoost, PySpark, JAX, MLFlow, MLOps, Caffe</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="h-px bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200"></div>
-
-  <!-- Education -->
-  <section id="education" class="max-w-6xl mx-auto px-5 py-14">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-center grad-text reveal">Education</h2>
-    <div class="mt-8 grid md:grid-cols-2 gap-6">
-      <div class="p-6 rounded-2xl border bg-white shadow-soft tilt reveal">
-        <h3 class="font-bold">Columbia University — M.S. in Data Science</h3>
-        <p class="text-sm text-slate-500">Aug 2024 – Dec 2025 • New York, NY • GPA: 3.8/4</p>
-        <p class="mt-2 text-sm">Applied ML, Deep Learning for NLP, Probability & Statistics, LLM-Based Generative AI, Causal Inference</p>
-      </div>
-      <div class="p-6 rounded-2xl border bg-white shadow-soft tilt reveal">
-        <h3 class="font-bold">Vellore Institute of Technology — B.Tech CSE</h3>
-        <p class="text-sm text-slate-500">Jul 2018 – Jul 2022 • Vellore, IN • GPA: 3.96/4</p>
-        <p class="mt-2 text-sm">DSA, Computer Architecture, Parallel & Distributed Computing, AI, Robotics</p>
-      </div>
-    </div>
-  </section>
-
-  <footer class="py-8 text-center text-sm text-slate-500">
-    © <span id="year"></span> Prakhar Dungarwal — Built with Tailwind & JS • Hosted on GitHub Pages
+  <footer class="py-6 text-center text-sm text-slate-500 dark:text-slate-600 border-t border-slate-200 dark:border-slate-800">
+    <p>© <span id="year"></span> Prakhar Dungarwal. Coded with passion and a lot of coffee.</p>
   </footer>
 
   <script>
     document.getElementById('year').innerText = new Date().getFullYear();
 
+    // Dark Mode Toggle
     const modeBtn = document.getElementById('mode');
-    const saved = localStorage.getItem('theme');
-    if(saved === 'dark') {
-      document.documentElement.classList.add('dark');
-      document.body.classList.add('bg-slate-950','text-slate-100');
-      modeBtn.textContent = '🌞';
-    }
+    const userTheme = localStorage.getItem('theme');
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    const themeCheck = () => {
+      if (userTheme === 'dark' || (!userTheme && systemTheme)) {
+        document.documentElement.classList.add('dark');
+        modeBtn.textContent = '🌞';
+      } else {
+        modeBtn.textContent = '🌙';
+      }
+    };
+    
     modeBtn.addEventListener('click', () => {
-      const isDark = document.documentElement.classList.toggle('dark');
-      document.body.classList.toggle('bg-slate-950');
-      document.body.classList.toggle('text-slate-100');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      modeBtn.textContent = isDark ? '🌞' : '🌙';
-    });
-
-    // Typewriter effect
-    const messages = [
-      'Agentic AI • ReAct • LangGraph',
-      'RAG & LLM Evaluation Pipelines',
-      'Forecasting & NLP Systems at Scale'
-    ];
-    let mi = 0, ci = 0;
-    const el = document.getElementById('typeline');
-    function type() {
-      if(ci <= messages[mi].length) {
-        el.textContent = messages[mi].slice(0, ci++) + '▌';
-        setTimeout(type, 45);
+      if (document.documentElement.classList.toggle('dark')) {
+        localStorage.setItem('theme', 'dark');
+        modeBtn.textContent = '🌞';
       } else {
-        setTimeout(erase, 1200);
+        localStorage.setItem('theme', 'light');
+        modeBtn.textContent = '🌙';
       }
-    }
-    function erase() {
-      if(ci >= 0){
-        el.textContent = messages[mi].slice(0, ci--) + '▌';
-        setTimeout(erase, 25);
-      } else {
-        mi = (mi + 1) % messages.length;
-        setTimeout(type, 200);
-      }
-    }
-    type();
-
-    // Reveal on scroll
-    const observer = new IntersectionObserver((ents) => {
-      ents.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // Cursor trail
-    const pool = Array.from({length: 10}, () => {
-      const d = document.createElement('div');
-      d.className = 'trail';
-      document.body.appendChild(d);
-      return d;
     });
-    let idx = 0;
-    window.addEventListener('mousemove', e => {
-      const d = pool[idx++ % pool.length];
-      d.style.transform = `translate(${e.clientX-4}px,${e.clientY-4}px)`;
-    });
+    
+    themeCheck();
 
-    // Particles
-    const c = document.getElementById('particles');
-    const ctx = c.getContext('2d');
-    function resize() {
-      c.width = c.offsetWidth; c.height = c.offsetHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-    const P = Array.from({ length: 70 }, () => ({
-      x: Math.random()*c.width, y: Math.random()*c.height,
-      vx: (Math.random()-0.5)*0.6, vy: (Math.random()-0.5)*0.6
-    }));
-    function animate() {
-      ctx.clearRect(0,0,c.width,c.height);
-      for(const p of P){
-        p.x += p.vx; p.y += p.vy;
-        if(p.x < 0 || p.x > c.width) p.vx *= -1;
-        if(p.y < 0 || p.y > c.height) p.vy *= -1;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.6, 0, Math.PI*2);
-        ctx.fillStyle = 'rgba(34,211,238,0.8)';
-        ctx.fill();
-      }
-      for(let i=0;i<P.length;i++){
-        for(let j=i+1;j<P.length;j++){
-          const dx = P[i].x - P[j].x, dy = P[i].y - P[j].y;
-          const d = Math.hypot(dx, dy);
-          if(d < 120){
-            ctx.strokeStyle = `rgba(99,102,241, ${1 - d/120})`;
-            ctx.lineWidth = .6;
-            ctx.beginPath();
-            ctx.moveTo(P[i].x, P[i].y);
-            ctx.lineTo(P[j].x, P[j].y);
-            ctx.stroke();
-          }
+    // Reveal on Scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
         }
-      }
-      requestAnimationFrame(animate);
-    }
-    animate();
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
