@@ -316,64 +316,72 @@
   <div class="divider"></div>
 
   <!-- EXPERIENCE (forced single row with logos, slightly trimmed) -->
+  <!-- EXPERIENCE -->
   <section id="experience" class="section">
     <div class="wrap">
       <h2 class="title">Work Experience</h2>
-
-      <div class="exp-row">
+  
+      <div class="grid" style="display:flex;flex-wrap:nowrap;gap:20px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;">
         <!-- Adobe Research -->
-        <div class="card exp-card" id="Adobe">
+        <div class="card" id="Adobe" style="min-width:260px;flex:1;transition:transform .3s,box-shadow .3s;">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-            <img class="logo" src="https://blog.adobe.com/en/publish/2020/05/28/media_1d87bf78b1ce19defbef0c7858b4df696215a4048.png?width=750&format=png&optimize=medium" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Adobe_Systems_logo_and_wordmark.svg/512px-Adobe_Systems_logo_and_wordmark.svg.png';" alt="Adobe"/>
+            <img class="logo" src="https://blog.adobe.com/en/publish/2020/05/28/media_1d87bf78b1ce19defbef0c7858b4df696215a4048.png?width=750&format=png&optimize=medium" 
+                 onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Adobe_Systems_logo_and_wordmark.svg/512px-Adobe_Systems_logo_and_wordmark.svg.png';" 
+                 alt="Adobe" style="transition:transform .3s,filter .3s;cursor:pointer;">
             <h3 style="margin:0">Adobe Research — Generative AI Researcher</h3>
           </div>
           <div class="muted">Aug 2025 – Present • New York, NY, USA</div>
           <ul class="list">
-            <li>Personalized multimodal LLMs with <b>GPT-4o-v</b> & <b>LLaVA</b>; 10+ eval factors → <b>95% consistency</b>.</li>
-            <li>Automated <b>MLLM-as-a-Judge</b> with <b>RAG</b> & agentic tools → accuracy ↑ <b>20%</b>.</li>
+            <li>Developed personalized multimodal LLM frameworks using <b>GPT-4o-v</b> and <b>LLaVA</b>, achieving <b>95% consistency</b> across datasets.</li>
+            <li>Built automated <b>MLLM-as-a-Judge</b> pipelines leveraging <b>RAG</b> and reasoning traces, improving model judgment accuracy by <b>20%</b>.</li>
           </ul>
         </div>
-
+  
         <!-- Intuit -->
-        <div class="card exp-card" id="Intuit">
+        <div class="card" id="Intuit" style="min-width:260px;flex:1;transition:transform .3s,box-shadow .3s;">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-            <img class="logo" src="https://logo.clearbit.com/intuit.com" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Intuit_Logo.svg/512px-Intuit_Logo.svg.png';" alt="Intuit"/>
+            <img class="logo" src="https://logo.clearbit.com/intuit.com" 
+                 onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Intuit_Logo.svg/512px-Intuit_Logo.svg.png';" 
+                 alt="Intuit" style="transition:transform .3s,filter .3s;cursor:pointer;">
             <h3 style="margin:0">Intuit — AI & Data Science Intern</h3>
           </div>
           <div class="muted">May 2025 – Aug 2025 • Mountain View, CA, USA</div>
           <ul class="list">
-            <li>Multi-agent orchestration with <b>LangGraph</b> & <b>ReAct</b> → GT annotation time ↓ <b>50%</b>.</li>
-            <li><b>GPT-4.5</b> & <b>Claude-3.5-Sonnet</b> + CoT + LLM-Judge → recall ↑ <b>30%</b>.</li>
+            <li>Built an agentic AI framework using <b>LangGraph</b> and <b>ReAct</b> orchestration, cutting annotation time by <b>50%</b>.</li>
+            <li>Used <b>GPT-4.5</b> and <b>Claude-3.5-Sonnet</b> with CoT evaluation, improving recall by <b>30%</b>.</li>
           </ul>
         </div>
-
+  
         <!-- Columbia AC4 -->
-        <div class="card exp-card" id="Columbia">
+        <div class="card" id="Columbia" style="min-width:260px;flex:1;transition:transform .3s,box-shadow .3s;">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-            <img class="logo" src="https://logo.clearbit.com/columbia.edu" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Columbia_University_shield.svg/512px-Columbia_University_shield.svg.png';" alt="Columbia University"/>
+            <img class="logo" src="https://logo.clearbit.com/columbia.edu" 
+                 onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Columbia_University_shield.svg/512px-Columbia_University_shield.svg.png';" 
+                 alt="Columbia University" style="transition:transform .3s,filter .3s;cursor:pointer;">
             <h3 style="margin:0">Columbia University (AC4 Lab) — AI & ML Researcher</h3>
           </div>
           <div class="muted">Aug 2024 – Present • New York, NY, USA</div>
           <ul class="list">
-            <li>Fine-tuned <b>RoBERTa</b> on <b>GoEmotions</b>; integrated <b>DeepSeek-R1</b> & <b>GPT-4o</b>.</li>
-            <li>Built cloud backend with <b>AWS</b> (S3, EC2), <b>LangChain</b>, YouTube APIs.</li>
+            <li>Fine-tuned <b>RoBERTa</b> on <b>GoEmotions</b> for emotion classification, integrating <b>DeepSeek-R1</b> & <b>GPT-4o</b> to reduce non-peaceful content by <b>30%</b>.</li>
+            <li>Built a backend with <b>AWS</b> (S3, EC2), <b>LangChain</b>, and YouTube APIs for Chrome extension analysis.</li>
           </ul>
         </div>
-
+  
         <!-- Morgan Stanley -->
-        <div class="card exp-card" id="MorganStanley">
+        <div class="card" id="MorganStanley" style="min-width:260px;flex:1;transition:transform .3s,box-shadow .3s;">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-            <img class="logo" src="https://logo.clearbit.com/morganstanley.com" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Morgan_Stanley_Logo_1.svg/512px-Morgan_Stanley_Logo_1.svg.png';" alt="Morgan Stanley"/>
+            <img class="logo" src="https://logo.clearbit.com/morganstanley.com" 
+                 onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Morgan_Stanley_Logo_1.svg/512px-Morgan_Stanley_Logo_1.svg.png';" 
+                 alt="Morgan Stanley" style="transition:transform .3s,filter .3s;cursor:pointer;">
             <h3 style="margin:0">Morgan Stanley — Senior Data Scientist</h3>
           </div>
           <div class="muted">Jan 2022 – Aug 2024 • Bengaluru, IN</div>
           <ul class="list">
-            <li><b>RAG</b> chatbot (<b>LLaMA-3.1-8B</b>, <b>all-mpnet-base-v2</b>) → resolution ↓ <b>60%</b>, cost ↓ <b>30%</b>.</li>
-            <li>Hybrid <b>CNN + ES + Prophet</b> forecasting → accuracy ↑ <b>20%</b> (~<b>$1M</b> savings).</li>
+            <li>Developed a <b>RAG</b> chatbot using <b>LLaMA-3.1-8B-Instruct</b> and <b>all-mpnet-base-v2</b>, reducing query resolution time by <b>60%</b> and costs by <b>30%</b>.</li>
+            <li>Implemented hybrid forecasting (<b>CNN</b> + <b>Prophet</b>), improving accuracy by <b>20%</b> and saving <b>$1M</b> annually.</li>
           </ul>
         </div>
       </div>
-      <div class="muted" style="margin-top:8px;font-size:12px">← Scroll horizontally on small screens</div>
     </div>
   </section>
 
