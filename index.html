@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Modernized single-file portfolio: light-first theme, glass UI, fixed onclick, aligned grids -->
+<!-- Final modernized portfolio: light-first theme, glass UI, interactive logos, one-row Experience, blue GitHub buttons -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -13,26 +13,27 @@
     :root{
       --ink:#0b1220; --muted:#5b6576; --line:#e5eaf2; --bg:#ffffff; --accent:#2563eb; --chip:#f7f9fc;
       --card-bg:#ffffff; --shadow:0 6px 20px rgba(15,23,42,.06);
-      --focus: 0 0 0 3px rgba(37,99,235,.35);
+      --focus:0 0 0 3px rgba(37,99,235,.35);
       --glass-bg:rgba(255,255,255,.82);
-      --glow: 0 8px 24px rgba(37,99,235,.15);
+      --glow:0 8px 24px rgba(37,99,235,.15);
     }
     body.dark{
       --ink:#e5e7eb; --muted:#9aa3b2; --line:#233046; --bg:#0b1220; --accent:#8ab4ff; --chip:#0f172a; --card-bg:#0e1623;
       --shadow:0 6px 24px rgba(2,6,23,.45);
-      --focus: 0 0 0 3px rgba(138,180,255,.35);
+      --focus:0 0 0 3px rgba(138,180,255,.35);
       --glass-bg:rgba(14,22,35,.6);
-      --glow: 0 8px 24px rgba(138,180,255,.18);
+      --glow:0 8px 24px rgba(138,180,255,.18);
     }
+
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
     body{
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;
-      transition:background .25s,color .25s
+      background:var(--bg); color:var(--ink); -webkit-font-smoothing:antialiased;
+      transition:background .25s,color .25s;
     }
     a{color:var(--accent);text-decoration:none;transition:opacity .18s, box-shadow .18s}
-    a:hover{opacity:.8}
+    a:hover{opacity:.85}
     a.link-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:999px}
     a.link-btn:hover{box-shadow:var(--glow)}
     a:focus,button:focus,input:focus{outline:none;box-shadow:var(--focus);border-radius:8px}
@@ -65,7 +66,7 @@
     body.dark .list{color:#c9d3e5}
     .list li{margin:6px 0}
 
-    /* GRID (fixed alignment) */
+    /* GRID */
     .grid{display:grid;gap:24px}
     .grid-2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr));align-items:start}
     .grid-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));align-items:start}
@@ -74,14 +75,27 @@
     .chips{display:flex;flex-wrap:wrap;gap:8px}
     .chip{border:1px solid var(--line);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--ink);background:var(--chip);cursor:pointer;transition:transform .1s}
     .chip:active{transform:scale(.96)}
-    .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:10px 14px;border-radius:999px;font-weight:600;cursor:pointer;background:transparent;color:var(--ink);transition:background .15s,border-color .15s,box-shadow .15s}
-    .btn:hover{background:rgba(2,6,23,.04);box-shadow:var(--glow)}
+    .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:10px 14px;border-radius:999px;font-weight:600;cursor:pointer;background:transparent;color:var(--ink);transition:background .15s,border-color .15s,box-shadow .15s, transform .15s}
+    .btn:hover{background:rgba(2,6,23,.04);box-shadow:var(--glow);transform:translateY(-1px)}
     .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
 
     /* AVATAR & LOGOS */
     .avatar{width:260px;height:260px;border-radius:50%;object-fit:cover;border:1px solid var(--line);box-shadow:var(--shadow)}
-    .logo{width:28px;height:28px;border-radius:6px;object-fit:contain;border:1px solid var(--line);background:#fff;margin-right:8px}
+    .logo{width:28px;height:28px;border-radius:6px;object-fit:contain;border:1px solid var(--line);background:#fff;margin-right:8px;transition:transform .18s, box-shadow .18s}
+    .logo:hover{transform:scale(1.06);box-shadow:var(--glow)}
     body.dark .logo{background:#fff}
+
+    /* PROJECT action row */
+    .actions{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap}
+
+    /* EXPERIENCE (forced one row) */
+    .exp-row{display:flex;gap:24px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}
+    .exp-row::-webkit-scrollbar{height:8px}
+    .exp-row::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:999px}
+    body.dark .exp-row::-webkit-scrollbar-thumb{background:#374151}
+    .exp-card{flex:0 0 calc(25% - 18px); /* 4 in one row */ min-width:260px}
+    @media(min-width:1200px){.exp-card{flex:0 0 calc(25% - 18px)}}
+    @media(max-width:900px){.exp-card{flex:0 0 300px}} /* still one row with horizontal scroll */
 
     /* Chatbot Sidebar (glass, rounded, visually identical content) */
     .chat-tab{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:60;background:var(--accent);color:#fff;padding:10px 12px;border-radius:10px 0 0 10px;font-weight:800;cursor:pointer;writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:.6px;box-shadow:0 10px 26px rgba(0,0,0,.25)}
@@ -159,7 +173,7 @@
 
   <div class="divider"></div>
 
-  <!-- PROJECTS (aligned into a single grid) -->
+  <!-- PROJECTS -->
   <section id="projects" class="section">
     <div class="wrap">
       <h2 class="title">Data Science Projects</h2>
@@ -172,10 +186,10 @@
             <li>Built a Neo4j MCP-powered ReAct Agent that converts natural language to <b>Cypher</b> and retrieves subgraphs for explainable recommendations, improving query accuracy by <b>40%</b> and response time <b>3×</b>.</li>
             <li>Optimized multi-hop reasoning and ranking with LangGraph, MCP Server, and GPT-4 evals, boosting recommendation relevance by <b>25%</b>.</li>
           </ul>
-          <div class="reactions">
-            <span class="react" onclick="spark(this)">👍</span>
-            <span class="react" onclick="window.open('https://github.com/prakhar394/CineGraphRAG-MCP-Agent','_blank')">⭐</span>
-            <span class="react" onclick="spark(this)">🔗</span>
+          <div class="actions">
+            <a class="btn primary" href="https://github.com/prakhar394/CineGraphRAG-MCP-Agent" target="_blank">
+              <i class="fab fa-github"></i> View on GitHub
+            </a>
           </div>
         </div>
 
@@ -186,10 +200,10 @@
             <li>Crafted a QA chatbot that understands user context for operational queries, fine-tuned on top of <b>Question-Answering LLMs</b>.</li>
             <li>Combined fuzzy string matching with cosine similarity to enhance retrieval; improved chatbot response speed by <b>30%</b> over traditional embedding search.</li>
           </ul>
-          <div class="reactions">
-            <span class="react" onclick="spark(this)">👍</span>
-            <span class="react" onclick="window.open('','_blank')">⭐</span>
-            <span class="react" onclick="spark(this)">🔗</span>
+          <div class="actions">
+            <a class="btn primary" href="#" target="_blank">
+              <i class="fab fa-github"></i> View on GitHub
+            </a>
           </div>
         </div>
 
@@ -200,10 +214,10 @@
             <li>Built an AI-driven toolkit using Deep Learning, NLP, and Python to extract tables and insights from BRSR reports of listed Indian companies, achieving 92% accuracy and cutting manual effort by 70%.</li>
             <li>Automated ESG metric computation and sentiment analysis with PyTorch, SpaCy, and Scikit-learn, ensuring 95% consistency across diverse sustainability reports.</li>
           </ul>
-          <div class="reactions">
-            <span class="react" onclick="spark(this)">👍</span>
-            <span class="react" onclick="window.open('https://github.com/prakhar394/BRSR-Parser','_blank')">⭐</span>
-            <span class="react" onclick="spark(this)">🔗</span>
+          <div class="actions">
+            <a class="btn primary" href="https://github.com/prakhar394/BRSR-Parser" target="_blank">
+              <i class="fab fa-github"></i> View on GitHub
+            </a>
           </div>
         </div>
 
@@ -214,10 +228,10 @@
             <li>Trained a CRNN-LSTM model on the IAM Dataset with 120,000 handwritten text samples operating PyTorch, achieving 91% accuracy and reducing paper evaluation time by 50%.</li>
             <li>Developed an Automated Paper Assessment tool using a CRNN model to accurately scan and transcribe handwritten scripts, outperforming conventional HMM models by 20%, with findings published in IRJET.</li>
           </ul>
-          <div class="reactions">
-            <span class="react" onclick="spark(this)">👍</span>
-            <span class="react" onclick="window.open('https://github.com/prakhar394/HCR','_blank')">⭐</span>
-            <span class="react" onclick="spark(this)">🔗</span>
+          <div class="actions">
+            <a class="btn primary" href="https://github.com/prakhar394/HCR" target="_blank">
+              <i class="fab fa-github"></i> View on GitHub
+            </a>
           </div>
         </div>
       </div>
@@ -301,65 +315,65 @@
   
   <div class="divider"></div>
 
-  <!-- EXPERIENCE -->
+  <!-- EXPERIENCE (forced single row with logos, slightly trimmed) -->
   <section id="experience" class="section">
     <div class="wrap">
       <h2 class="title">Work Experience</h2>
 
-      <div class="grid grid-2">
+      <div class="exp-row">
         <!-- Adobe Research -->
-        <div class="card" id="Adobe">
+        <div class="card exp-card" id="Adobe">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
             <img class="logo" src="https://blog.adobe.com/en/publish/2020/05/28/media_1d87bf78b1ce19defbef0c7858b4df696215a4048.png?width=750&format=png&optimize=medium" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Adobe_Systems_logo_and_wordmark.svg/512px-Adobe_Systems_logo_and_wordmark.svg.png';" alt="Adobe"/>
             <h3 style="margin:0">Adobe Research — Generative AI Researcher</h3>
           </div>
           <div class="muted">Aug 2025 – Present • New York, NY, USA</div>
           <ul class="list">
-            <li>Developing personalized multimodal LLM frameworks using <b>GPT-4o-v</b> and <b>LLaVA</b>, defining 10+ evaluation factors to quantitatively assess image edits with <b>95% consistency</b> across datasets.</li>
-            <li>Building automated <b>MLLM-as-a-Judge</b> pipelines leveraging <b>RAG</b>, reasoning traces, and agentic tool binding, improving model judgment accuracy by <b>20%</b> and enabling scalable, research-grade evaluation.</li>
+            <li>Personalized multimodal LLMs with <b>GPT-4o-v</b> & <b>LLaVA</b>; 10+ eval factors → <b>95% consistency</b>.</li>
+            <li>Automated <b>MLLM-as-a-Judge</b> with <b>RAG</b> & agentic tools → accuracy ↑ <b>20%</b>.</li>
           </ul>
         </div>
 
         <!-- Intuit -->
-        <div class="card" id="Intuit">
+        <div class="card exp-card" id="Intuit">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
             <img class="logo" src="https://logo.clearbit.com/intuit.com" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Intuit_Logo.svg/512px-Intuit_Logo.svg.png';" alt="Intuit"/>
             <h3 style="margin:0">Intuit — AI & Data Science Intern</h3>
           </div>
           <div class="muted">May 2025 – Aug 2025 • Mountain View, CA, USA</div>
           <ul class="list">
-            <li>Developed an agentic AI framework using <b>LangGraph</b> and <b>ReAct-based</b> multi-agent orchestration to enhance customer success metrics, reducing ground-truth annotation time by <b>50%</b>.</li>
-            <li>Utilized <b>GPT-4.5</b> and <b>Claude-3.5-Sonnet</b> to extract business quality markers from call transcripts, improving recall by <b>30%</b> via <b>CoT</b> and <b>LLM-as-a-Judge</b> evaluation.</li>
+            <li>Multi-agent orchestration with <b>LangGraph</b> & <b>ReAct</b> → GT annotation time ↓ <b>50%</b>.</li>
+            <li><b>GPT-4.5</b> & <b>Claude-3.5-Sonnet</b> + CoT + LLM-Judge → recall ↑ <b>30%</b>.</li>
           </ul>
         </div>
 
         <!-- Columbia AC4 -->
-        <div class="card" id="Columbia">
+        <div class="card exp-card" id="Columbia">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
             <img class="logo" src="https://logo.clearbit.com/columbia.edu" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Columbia_University_shield.svg/512px-Columbia_University_shield.svg.png';" alt="Columbia University"/>
             <h3 style="margin:0">Columbia University (AC4 Lab) — AI & ML Researcher</h3>
           </div>
           <div class="muted">Aug 2024 – Present • New York, NY, USA</div>
           <ul class="list">
-            <li>Fine-tuned a <b>RoBERTa</b> model on <b>GoEmotions</b> to classify YouTube videos by emotion (respect vs. contempt), integrating <b>DeepSeek-R1</b> and <b>GPT-4o</b> for reasoning, targeting a <b>30%</b> reduction in non-peaceful watch time.</li>
-            <li>Built and deployed a cloud backend for a Chrome extension analyzing YouTube watch history using <b>AWS (S3, EC2)</b>, <b>LangChain</b>, and YouTube APIs.</li>
+            <li>Fine-tuned <b>RoBERTa</b> on <b>GoEmotions</b>; integrated <b>DeepSeek-R1</b> & <b>GPT-4o</b>.</li>
+            <li>Built cloud backend with <b>AWS</b> (S3, EC2), <b>LangChain</b>, YouTube APIs.</li>
           </ul>
         </div>
 
         <!-- Morgan Stanley -->
-        <div class="card" id="MorganStanley">
+        <div class="card exp-card" id="MorganStanley">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
             <img class="logo" src="https://logo.clearbit.com/morganstanley.com" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Morgan_Stanley_Logo_1.svg/512px-Morgan_Stanley_Logo_1.svg.png';" alt="Morgan Stanley"/>
             <h3 style="margin:0">Morgan Stanley — Senior Data Scientist</h3>
           </div>
           <div class="muted">Jan 2022 – Aug 2024 • Bengaluru, IN</div>
           <ul class="list">
-            <li>Spearheaded a <b>RAG</b> chatbot using <b>LLaMA-3.1-8B-Instruct</b>, <b>all-mpnet-base-v2</b>, and NLP techniques, cutting query resolution time by <b>60%</b> and annual ops costs by <b>30%</b>.</li>
-            <li>Improved time-series forecasting by integrating <b>CNN</b>, <b>Exponential Smoothing</b>, and <b>Prophet</b> into a hybrid model, boosting accuracy by <b>20%</b> and enabling <b>$1M</b> cost savings.</li>
-            <li>Orchestrated daily ML/DS operations, including forecasting, algorithm refinement, and NLP pipelines; delivered enterprise data-center analytics reducing annual spend by <b>20%</b>.</li>
+            <li><b>RAG</b> chatbot (<b>LLaMA-3.1-8B</b>, <b>all-mpnet-base-v2</b>) → resolution ↓ <b>60%</b>, cost ↓ <b>30%</b>.</li>
+            <li>Hybrid <b>CNN + ES + Prophet</b> forecasting → accuracy ↑ <b>20%</b> (~<b>$1M</b> savings).</li>
           </ul>
         </div>
       </div>
+      <div class="muted" style="margin-top:8px;font-size:12px">← Scroll horizontally on small screens</div>
     </div>
   </section>
 
