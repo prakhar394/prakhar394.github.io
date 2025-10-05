@@ -1,232 +1,540 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<!--
+  IMPORTANT:
+  This is a plain HTML + JS single-file site intended for GitHub Pages or any static host.
+  Name it `index.html`.
+  If you try to run this file as `/index.tsx` (TypeScript/JSX), build tools will throw
+  `SyntaxError: /index.tsx: Unexpected token (1:0)`. Use this as HTML, not TSX.
+-->
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Prakhar Dungarwal • AI & Data Science</title>
-  <meta name="description" content="Prakhar Dungarwal — MS Data Science @ Columbia. Building impactful AI systems with LLMs, Agentic AI, and Applied Machine Learning."/>
-  <link rel="icon" type="image/png" href="https://www.google.com/s2/favicons?domain=columbia.edu" />
+  <meta name="description" content="Prakhar Dungarwal — MS Data Science @ Columbia. Adobe Research • Intuit • Columbia AC4 • Morgan Stanley. LLMs, Agentic AI, RAG, Applied ML." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <style>
-    :root {
-      --brand-primary: #2563EB;
-      --brand-secondary: #1D4ED8;
-      --highlight: #22d3ee;
-      --accent: #a855f7;
+  <style>
+    :root{
+      --ink:#0b1220; --muted:#5b6576; --line:#e5eaf2; --bg:#ffffff; --accent:#2563eb; --chip:#f7f9fc;
+      --card-bg:#ffffff; --shadow:0 6px 20px rgba(15,23,42,.06);
+      --focus: 0 0 0 3px rgba(37,99,235,.35);
     }
-    .grad-text { background: linear-gradient(90deg, var(--brand-primary), var(--highlight), var(--accent)); -webkit-background-clip: text; color: transparent; }
-    .glass { background: rgba(255,255,255,0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.5); }
-    .dark .glass { background: rgba(2,6,23,0.65); border-color: rgba(148,163,184,0.25); }
-    .reveal { opacity: 0; transform: translateY(20px); transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-    .reveal.show { opacity: 1; transform: translateY(0); }
-    .btn-primary { background: linear-gradient(90deg, var(--brand-primary), var(--accent)); box-shadow: 0 4px 15px rgba(37,99,235,0.3); }
-    .tag { display: inline-block; background-color: #e0f2fe; color: #0c4a6e; padding: 2px 8px; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; }
-    .dark .tag { background-color: #1e293b; color: #94a3b8; }
+    body.dark{
+      --ink:#e5e7eb; --muted:#9aa3b2; --line:#233046; --bg:#0b1220; --accent:#8ab4ff; --chip:#0f172a; --card-bg:#0e1623; --shadow:0 6px 24px rgba(2,6,23,.45);
+      --focus: 0 0 0 3px rgba(138,180,255,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;transition:background .25s,color .25s}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    a:focus,button:focus,input:focus{outline:none;box-shadow:var(--focus);border-radius:8px}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:saturate(160%) blur(8px);border-bottom:1px solid var(--line)}
+    body.dark .nav{background:rgba(11,18,32,.65)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px}
+    .brand{font-weight:900;letter-spacing:.2px}
+    .nav a{color:var(--ink);font-weight:600;margin-left:18px}
+    .btn-toggle{border:1px solid var(--line);border-radius:12px;padding:6px 10px;background:transparent;color:var(--ink);cursor:pointer}
+
+    /* LAYOUT */
+    .section{padding:72px 0}
+    .h1{font-size:44px;line-height:1.15;margin:0}
+    .lead{color:var(--muted);font-size:18px;margin-top:12px}
+    .row{display:grid;gap:28px}
+    @media(min-width:900px){.row-2{grid-template-columns:1.2fr .8fr}.row-3{grid-template-columns:repeat(3,1fr)}}
+
+    /* CARDS */
+    .card{border:1px solid var(--line);border-radius:16px;padding:22px;background:var(--card-bg);box-shadow:var(--shadow)}
+    .card h3{margin:0 0 6px 0}
+    .muted{color:var(--muted)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{border:1px solid var(--line);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--ink);background:var(--chip);cursor:pointer;transition:transform .08s}
+    .chip:active{transform:scale(.97)}
+
+    /* BUTTONS (dark-mode safe) */
+    .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:10px 14px;border-radius:12px;font-weight:600;cursor:pointer;background:transparent;color:var(--ink);transition:background .15s,border-color .15s,color .15s}
+    .btn:hover{background:rgba(2,6,23,.04)}
+    body.dark .btn{color:var(--ink);background:transparent;border-color:var(--line)}
+    body.dark .btn:hover{background:rgba(255,255,255,.06)}
+    .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+    body.dark .btn.primary{background:var(--accent);color:#0b1220;border-color:var(--accent)}
+    .btn.pill{border-radius:999px}
+
+    .divider{height:1px;background:var(--line);margin:0}
+    .title{font-weight:900;margin:0 0 18px 0}
+    .stack{font-size:14px;color:var(--muted)}
+    .list{margin:10px 0 0 18px;color:#233047}
+    body.dark .list{color:#c9d3e5}
+    .list li{margin:6px 0}
+    .grid{display:grid;gap:18px}
+    @media(min-width:900px){.grid-2{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(3,1fr)}}
+    .footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:14px}
+    .avatar{width:240px;height:240px;border-radius:50%;object-fit:cover;border:1px solid var(--line);box-shadow:var(--shadow)}
+    .logo{width:28px;height:28px;border-radius:6px;object-fit:contain;border:1px solid var(--line);background:#fff;margin-right:8px}
+    body.dark .logo{background:#fff}
+
+    /* Chatbot Sidebar (fun UI) */
+    .chat-tab{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:60;background:var(--accent);color:#0b1220;padding:10px 12px;border-radius:10px 0 0 10px;font-weight:800;cursor:pointer;writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:.6px;box-shadow:0 10px 26px rgba(0,0,0,.25)}
+    .sidebar{position:fixed;top:0;right:0;height:100vh;width:420px;max-width:92vw;background:var(--card-bg);border-left:1px solid var(--line);box-shadow:var(--shadow);transform:translateX(100%);transition:transform .25s ease;z-index:60;display:flex;flex-direction:column}
+    .sidebar.open{transform:translateX(0)}
+    .sidebar header{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid var(--line)}
+    .side-title{display:flex;align-items:center;gap:10px;font-weight:900}
+    .side-title img{width:28px;height:28px;border-radius:50%}
+    .status{font-size:11px;color:var(--muted)}
+    .messages{flex:1;overflow:auto;padding:12px}
+    .msg{display:flex;gap:8px;margin:8px 0}
+    .avatar-mini{width:28px;height:28px;border-radius:999px;border:1px solid var(--line);object-fit:cover}
+    .b{justify-content:flex-end}
+    .bubble{max-width:78%;padding:10px 12px;border-radius:14px;border:1px solid var(--line)}
+    .a .bubble{background:#f7f9fc}
+    body.dark .a .bubble{background:#0f172a}
+    .b .bubble{background:var(--accent);color:#0b1220;border-color:var(--accent)}
+    .sidebar footer{display:flex;gap:8px;align-items:center;padding:10px;border-top:1px solid var(--line)}
+    .sidebar input{flex:1;padding:10px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--ink)}
+    .pill-suggest{display:inline-block;border:1px dashed var(--line);padding:6px 10px;border-radius:999px;font-size:12px;margin:4px 6px 0 0;cursor:pointer}
+    .typing{font-size:12px;color:var(--muted);margin-left:6px}
+    .reactions{display:flex;gap:6px;margin-top:6px}
+    .react{font-size:12px;border:1px solid var(--line);padding:4px 6px;border-radius:999px;cursor:pointer}
+
+    /* Diagnostics */
+    #tests{max-width:1100px;margin:24px auto 48px;border:1px dashed var(--line);border-radius:12px;padding:12px}
+    #testResults{font:12px/1.4 Inter,system-ui;white-space:pre-wrap;color:var(--muted)}
+    .ok{color:#059669}
+    .fail{color:#dc2626}
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
-
-  <nav class="fixed top-0 w-full backdrop-blur-lg bg-white/80 dark:bg-slate-950/80 z-50 border-b border-slate-200 dark:border-slate-800">
-    <div class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
-      <a href="#home" class="text-xl font-extrabold grad-text">Prakhar Dungarwal</a>
-      <div class="hidden md:flex items-center gap-6 font-medium text-sm">
-        <a href="#experience" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">Experience</a>
-        <a href="#projects" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">Projects</a>
-        <a href="#skills" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">Skills</a>
-        <a href="#contact" class="px-3 py-1.5 rounded-full text-white btn-primary hover:opacity-90 transition-opacity">Contact</a>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand">Prakhar D.</div>
+      <div>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+        <button id="toggle" class="btn-toggle" aria-label="Toggle theme">🌓</button>
       </div>
-       <button id="mode" title="Toggle theme" class="px-2 py-1 rounded-lg border border-slate-300 dark:border-slate-700 text-lg">🌙</button>
     </div>
   </nav>
 
-  <header id="home" class="max-w-6xl mx-auto px-5 pt-32 pb-20 flex md:flex-row flex-col items-center gap-8">
-    <div class="md:w-2/3 text-center md:text-left reveal show">
-      <h1 class="text-4xl md:text-6xl font-black leading-tight">I build <span class="grad-text">intelligent systems</span> that deliver business value.</h1>
-      <p class="mt-5 text-lg text-slate-600 dark:text-slate-400">
-        Hi, I’m Prakhar. A Data Scientist and Researcher at <strong>Columbia University</strong>, passionate about creating production-ready AI solutions. My work focuses on <strong>Agentic AI</strong>, <strong>RAG systems</strong>, and <strong>Applied Machine Learning</strong> to solve complex, real-world problems.
-      </p>
-      <div class="mt-8 flex flex-wrap gap-3 justify-center md:justify-start">
-        <a href="#projects" class="px-5 py-3 rounded-xl text-white font-semibold btn-primary hover:opacity-90 transition-opacity">View My Work</a>
-        <a href="resume.pdf" target="_blank" class="px-5 py-3 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Download Resume</a>
+  <!-- HERO -->
+  <header class="section">
+    <div class="wrap">
+      <div class="row row-2" style="align-items:center">
+        <div>
+          <h1 class="h1">I build AI systems that are <span style="color:var(--accent)">helpful</span>, <span style="color:var(--accent)">auditable</span> & <span style="color:var(--accent)">shippable</span>.</h1>
+          <p class="lead">Hi, I’m <b>Prakhar Dungarwal</b> — MS Data Science @ Columbia. I work on LLM‑driven and agentic AI systems, evaluation pipelines, and applied ML that moves business metrics.</p>
+          <div class="chips" style="margin:16px 0 8px 0">
+            <span class="chip" data-intent="#experience Adobe Research">Generative AI</span>
+            <span class="chip" data-intent="#experience Intuit">Agentic AI</span>
+            <span class="chip" data-intent="#experience Columbia">NLP</span>
+            <span class="chip" data-intent="#experience Morgan Stanley">RAG</span>
+            <span class="chip" data-intent="#projects CART">CART</span>
+          </div>
+          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+            <a href="#projects" class="btn primary pill">Explore Projects</a>
+            <button class="btn pill" onclick="openChat();">🤖 Chat with PrakharBot</button>
+          </div>
+          <p class="muted" style="margin-top:10px">San Francisco, CA • (917) 217‑8276 • <a href="mailto:pd2782@columbia.edu">pd2782@columbia.edu</a></p>
+          <p class="muted" style="margin-top:-4px"><a href="https://www.linkedin.com/in/prakhardungarwal/" target="_blank">LinkedIn</a> • <a href="https://www.datascienceportfol.io/prakhar_dungarwal" target="_blank">Portfolio</a> • <a href="https://github.com/prakhar394" target="_blank">GitHub</a></p>
+        </div>
+        <div style="justify-self:end;text-align:center">
+          <img class="avatar" src="https://avatars.githubusercontent.com/u/14235555?v=4" alt="Prakhar headshot"/>
+        </div>
       </div>
-    </div>
-    <div class="md:w-1/3 relative reveal show">
-      <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full blur-3xl opacity-30 dark:opacity-20"></div>
-      <img src="https://avatars.githubusercontent.com/u/14235555?v=4" alt="Prakhar Dungarwal headshot" class="relative w-64 h-64 rounded-full object-cover mx-auto border-4 border-white dark:border-slate-900 shadow-xl"/>
     </div>
   </header>
 
-  <section id="experience" class="py-20 bg-slate-100 dark:bg-slate-900">
-    <div class="max-w-6xl mx-auto px-5">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-center grad-text reveal">Career Journey</h2>
-      <div class="mt-12 grid md:grid-cols-2 gap-8">
-        <article class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-md reveal">
-          <h3 class="text-xl font-bold">AI & Data Science Intern @ Intuit</h3>
-          <p class="text-sm text-slate-500 dark:text-slate-400">May 2025 – Present • Mountain View, CA</p>
-          <ul class="mt-3 text-sm text-slate-700 dark:text-slate-300 list-disc pl-5 space-y-1">
-            <li>Developed an Agentic AI framework (<strong>LangGraph & ReAct</strong>) that reduced ground-truth annotation time by <strong>50%</strong>.</li>
-            <li>Improved business metric extraction recall by <strong>30%</strong> using <strong>GPT-4.5</strong> and an LLM-as-a-Judge evaluation framework.</li>
+  <div class="divider"></div>
+
+  <!-- EXPERIENCE (100% from provided resume) -->
+  <section id="experience" class="section">
+    <div class="wrap">
+      <h2 class="title">Work Experience</h2>
+
+      <div class="grid grid-2">
+        <!-- Adobe Research -->
+        <div class="card" id="Adobe">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <img class="logo" src="https://logo.clearbit.com/adobe.com" alt="Adobe"/>
+            <h3 style="margin:0">Adobe Research — Generative AI Researcher</h3>
+          </div>
+          <div class="muted">Aug 2025 – Present • New York, NY, USA</div>
+          <ul class="list">
+            <li>Developing personalized multimodal LLM frameworks using <b>GPT‑4o‑v</b> and <b>LLaVA</b>, defining 10+ evaluation factors to quantitatively assess image edits with <b>95% consistency</b> across datasets.</li>
+            <li>Building automated <b>MLLM‑as‑a‑Judge</b> pipelines leveraging <b>RAG</b>, reasoning traces, and agentic tool binding, improving model judgment accuracy by <b>20%</b> and enabling scalable, research‑grade evaluation.</li>
           </ul>
-        </article>
-        <article class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-md reveal">
-          <h3 class="text-xl font-bold">AI & ML Researcher @ Columbia Climate School</h3>
-          <p class="text-sm text-slate-500 dark:text-slate-400">Aug 2024 – Present • New York, NY</p>
-          <ul class="mt-3 text-sm text-slate-700 dark:text-slate-300 list-disc pl-5 space-y-1">
-            <li>Fine-tuning a <strong>RoBERTa</strong> model for emotion classification to reduce non-peaceful content consumption on YouTube by a target of <strong>30%</strong>.</li>
-            <li>Engineered and deployed a scalable backend on <strong>AWS (S3, EC2)</strong> using LangChain for a Chrome Extension.</li>
+        </div>
+
+        <!-- Intuit -->
+        <div class="card" id="Intuit">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <img class="logo" src="https://logo.clearbit.com/intuit.com" alt="Intuit"/>
+            <h3 style="margin:0">Intuit — AI & Data Science Intern</h3>
+          </div>
+          <div class="muted">May 2025 – Present • Mountain View, CA, USA</div>
+          <ul class="list">
+            <li>Developed an agentic AI framework using <b>LangGraph</b> and <b>ReAct‑based</b> multi‑agent orchestration to enhance customer success metrics, reducing ground‑truth annotation time by <b>50%</b>.</li>
+            <li>Utilized <b>GPT‑4.5</b> and <b>Claude‑3.5‑Sonnet</b> to extract business quality markers from call transcripts, improving recall by <b>30%</b> via <b>CoT</b> and <b>LLM‑as‑a‑Judge</b> evaluation.</li>
           </ul>
-        </article>
-        <article class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-md reveal">
-          <h3 class="text-xl font-bold">Senior Data Scientist @ Morgan Stanley</h3>
-          <p class="text-sm text-slate-500 dark:text-slate-400">Jan 2024 – Aug 2024 • Bengaluru, IN</p>
-          <ul class="mt-3 text-sm text-slate-700 dark:text-slate-300 list-disc pl-5 space-y-1">
-            <li>Spearheaded a <strong>RAG chatbot</strong> using LLaMA-3.1, cutting query resolution time by <strong>60%</strong> and saving <strong>30%</strong> in annual op-ex.</li>
-            <li>Boosted forecasting accuracy by <strong>20%</strong> with a hybrid CNN/Prophet model, leading to <strong>$1M in cost savings</strong>.</li>
+        </div>
+
+        <!-- Columbia AC4 -->
+        <div class="card" id="Columbia">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <img class="logo" src="https://logo.clearbit.com/columbia.edu" alt="Columbia University"/>
+            <h3 style="margin:0">Columbia University (AC4 Lab) — AI & ML Researcher</h3>
+          </div>
+          <div class="muted">Aug 2024 – Present • New York, NY, USA</div>
+          <ul class="list">
+            <li>Fine‑tuned a <b>RoBERTa</b> model on <b>GoEmotions</b> to classify YouTube videos by emotion (respect vs. contempt), integrating <b>DeepSeek‑R1</b> and <b>GPT‑4o</b> for reasoning, targeting a <b>30%</b> reduction in non‑peaceful watch time.</li>
+            <li>Built and deployed a cloud backend for a Chrome extension analyzing YouTube watch history using <b>AWS (S3, EC2)</b>, <b>LangChain</b>, and YouTube APIs.</li>
           </ul>
-        </article>
-        <article class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-md reveal">
-          <h3 class="text-xl font-bold">Data Scientist @ Morgan Stanley</h3>
-          <p class="text-sm text-slate-500 dark:text-slate-400">Aug 2022 – Jan 2024 • Bengaluru, IN</p>
-          <ul class="mt-3 text-sm text-slate-700 dark:text-slate-300 list-disc pl-5 space-y-1">
-            <li>Trained ML models that reduced annual data center energy spend by <strong>20%</strong>.</li>
-            <li>Automated ESG metric extraction using <strong>spaCy, Tesseract, and OpenCV</strong>, cutting analysis time by <strong>50%</strong>.</li>
+        </div>
+
+        <!-- Morgan Stanley -->
+        <div class="card" id="MorganStanley">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <img class="logo" src="https://logo.clearbit.com/morganstanley.com" alt="Morgan Stanley"/>
+            <h3 style="margin:0">Morgan Stanley — Senior Data Scientist</h3>
+          </div>
+          <div class="muted">Jan 2022 – Aug 2024 • Bengaluru, IN</div>
+          <ul class="list">
+            <li>Spearheaded a <b>RAG</b> chatbot using <b>LLaMA‑3.1‑8B‑Instruct</b>, <b>all‑mpnet‑base‑v2</b>, and NLP techniques, cutting query resolution time by <b>60%</b> and annual ops costs by <b>30%</b>.</li>
+            <li>Improved time‑series forecasting by integrating <b>CNN</b>, <b>Exponential Smoothing</b>, and <b>Prophet</b> into a hybrid model, boosting accuracy by <b>20%</b> and enabling <b>$1M</b> cost savings.</li>
+            <li>Orchestrated daily ML/DS operations, including forecasting, algorithm refinement, and NLP pipelines; delivered enterprise data‑center analytics reducing annual spend by <b>20%</b>.</li>
           </ul>
-        </article>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="projects" class="py-20">
-    <div class="max-w-6xl mx-auto px-5">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-center grad-text reveal">Featured Projects</h2>
-      <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        
-        <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-lg reveal">
-          <h3 class="text-lg font-bold">YouTube Emotion Analyzer Chrome Extension</h3>
-          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">A browser extension that analyzes video transcripts to classify content based on emotions like respect vs. contempt, aiming to promote healthier content consumption.</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <span class="tag">RoBERTa</span><span class="tag">GPT-4o</span><span class="tag">AWS</span><span class="tag">LangChain</span><span class="tag">Chrome Ext.</span>
-          </div>
-          <div class="mt-4 flex gap-3 text-sm">
-            <a href="[LINK_TO_GITHUB]" target="_blank" class="font-semibold text-blue-600 dark:text-cyan-400 hover:underline">GitHub →</a>
-            <a href="[LINK_TO_DEMO_OR_PAPER]" target="_blank" class="font-semibold text-blue-600 dark:text-cyan-400 hover:underline">Live Demo →</a>
-          </div>
-        </div>
+  <div class="divider"></div>
 
-        <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-lg reveal">
-          <h3 class="text-lg font-bold">CineGraphRAG Movie Recommender</h3>
-          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">A ReAct agent using a knowledge graph (Neo4j) to provide explainable movie recommendations from natural language queries, boosting query accuracy by 40%.</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <span class="tag">LangGraph</span><span class="tag">ReAct Agent</span><span class="tag">Neo4j</span><span class="tag">GPT-4</span><span class="tag">RAG</span>
-          </div>
-           <div class="mt-4 flex gap-3 text-sm">
-            <a href="[LINK_TO_GITHUB]" target="_blank" class="font-semibold text-blue-600 dark:text-cyan-400 hover:underline">GitHub →</a>
-          </div>
+  <!-- PROJECTS (from provided resume list) -->
+  <section id="projects" class="section">
+    <div class="wrap">
+      <h2 class="title">Data Science Projects</h2>
+      <div class="grid grid-2">
+        <div class="card" id="CineGraphRAG">
+          <h3>CineGraphRAG — MCP Agent for Movie Recommendations</h3>
+          <p class="stack">Neo4j • ReAct • LangGraph • MCP Server • GPT‑4 evals</p>
+          <ul class="list">
+            <li>Built a Neo4j MCP‑powered ReAct Agent that converts natural language to <b>Cypher</b> and retrieves subgraphs for explainable recommendations, improving query accuracy by <b>40%</b> and response time <b>3×</b>.</li>
+            <li>Optimized multi‑hop reasoning and ranking with LangGraph, MCP Server, and GPT‑4 evals, boosting recommendation relevance by <b>25%</b>.</li>
+          </ul>
+          <div class="reactions"><span class="react" onclick="spark(this)">👍</span><span class="react" onclick="spark(this)">⭐</span><span class="react" onclick="spark(this)">🔗</span></div>
         </div>
-        
-        <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-lg reveal">
-          <h3 class="text-lg font-bold">Handwritten Text Recognition (CRNN)</h3>
-          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">A CRNN-LSTM model trained on the IAM Dataset to automate the assessment of handwritten papers, achieving 91% accuracy and outperforming HMM models by 20%.</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <span class="tag">PyTorch</span><span class="tag">CRNN</span><span class="tag">LSTM</span><span class="tag">OpenCV</span><span class="tag">Published Paper</span>
-          </div>
-           <div class="mt-4 flex gap-3 text-sm">
-            <a href="[LINK_TO_GITHUB]" target="_blank" class="font-semibold text-blue-600 dark:text-cyan-400 hover:underline">GitHub →</a>
-            <a href="[LINK_TO_PUBLICATION]" target="_blank" class="font-semibold text-blue-600 dark:text-cyan-400 hover:underline">Publication →</a>
-          </div>
+        <div class="card" id="CART">
+          <h3>Context‑Aware Rendition with Transformers (CART)</h3>
+          <p class="stack">Transformers • NLP search • Cosine Similarity • Fuzzy Matching</p>
+          <ul class="list">
+            <li>Crafted a QA chatbot that understands user context for operational queries, fine‑tuned on top of <b>Question‑Answering LLMs</b>.</li>
+            <li>Combined fuzzy string matching with cosine similarity to enhance retrieval; improved chatbot response speed by <b>30%</b> over traditional embedding search.</li>
+          </ul>
+          <div class="reactions"><span class="react" onclick="spark(this)">👍</span><span class="react" onclick="spark(this)">💬</span><span class="react" onclick="spark(this)">🧠</span></div>
         </div>
-        
       </div>
     </div>
   </section>
 
-  <section id="skills" class="py-20 bg-slate-100 dark:bg-slate-900">
-    <div class="max-w-6xl mx-auto px-5">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-center grad-text reveal">Technical Toolbox</h2>
-        <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div class="reveal">
-                <h4 class="text-lg font-bold">Languages & Databases</h4>
-                <p class="mt-2 text-slate-600 dark:text-slate-400 text-sm">Python, SQL, R, C++, Go, AWS, Azure, Snowpark</p>
-            </div>
-            <div class="reveal">
-                <h4 class="text-lg font-bold">AI/ML Concepts</h4>
-                <p class="mt-2 text-slate-600 dark:text-slate-400 text-sm">Generative AI, Agentic AI, RAG, Reinforcement Learning, NLP, Time Series, MLOps</p>
-            </div>
-            <div class="reveal">
-                <h4 class="text-lg font-bold">LLM Frameworks</h4>
-                <p class="mt-2 text-slate-600 dark:text-slate-400 text-sm">LangChain, LlamaIndex, Hugging Face, OpenAI API, Transformers</p>
-            </div>
-             <div class="reveal">
-                <h4 class="text-lg font-bold">ML Libraries</h4>
-                <p class="mt-2 text-slate-600 dark:text-slate-400 text-sm">PyTorch, TensorFlow, Scikit-learn, XGBoost, PySpark, JAX</p>
-            </div>
+  <div class="divider"></div>
+
+  <!-- SKILLS (GitHub README-style badges) -->
+  <section id="skills" class="section">
+    <div class="wrap">
+      <h2 class="title">Skills & Interests</h2>
+
+      <div class="card">
+        <h3>Programming & Tools</h3>
+        <p class="muted">Python, SQL, R, C, C++, Go, Docker, Git, Streamlit, AWS, Azure, Snowpark, Pandas, NumPy</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+          <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
+          <img src="https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=postgresql&logoColor=white" alt="SQL"/>
+          <img src="https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white" alt="R"/>
+          <img src="https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white" alt="C"/>
+          <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white" alt="C++"/>
+          <img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="Go"/>
+          <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"/>
+          <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git"/>
+          <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit"/>
+          <img src="https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white" alt="AWS"/>
+          <img src="https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white" alt="Azure"/>
+          <img src="https://img.shields.io/badge/Snowpark-29B5E8?style=for-the-badge&logo=snowflake&logoColor=white" alt="Snowpark"/>
+          <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas"/>
+          <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy"/>
         </div>
+      </div>
+
+      <div class="grid grid-2" style="margin-top:18px">
+        <div class="card">
+          <h3>Specialized Techniques</h3>
+          <p class="muted">Machine Learning, AI Agents, Reinforcement Learning, LLMs, A/B Testing, RAG, Generative AI</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+            <img src="https://img.shields.io/badge/Machine%20Learning-102230?style=for-the-badge&logo=python&logoColor=white" alt="ML"/>
+            <img src="https://img.shields.io/badge/AI%20Agents-FFB6C1?style=for-the-badge&logo=react&logoColor=black" alt="AI Agents"/>
+            <img src="https://img.shields.io/badge/Reinforcement%20Learning-0052CC?style=for-the-badge&logo=openai&logoColor=white" alt="RL"/>
+            <img src="https://img.shields.io/badge/LLMs-0A66C2?style=for-the-badge&logo=openai&logoColor=white" alt="LLMs"/>
+            <img src="https://img.shields.io/badge/A%2FB%20Testing-EC407A?style=for-the-badge&logo=chartdotjs&logoColor=white" alt="A/B"/>
+            <img src="https://img.shields.io/badge/RAG-1976D2?style=for-the-badge&logo=neo4j&logoColor=white" alt="RAG"/>
+            <img src="https://img.shields.io/badge/Generative%20AI-7B1FA2?style=for-the-badge&logo=openaigym&logoColor=white" alt="GenAI"/>
+          </div>
+        </div>
+        <div class="card">
+          <h3>LLM Tools & Frameworks</h3>
+          <p class="muted">LangChain, LlamaIndex, OpenAI API, Hugging Face, ChromaDB, FAISS, Streamlit, Transformers</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+            <img src="https://img.shields.io/badge/LangChain-000000?style=for-the-badge&logo=python&logoColor=white" alt="LangChain"/>
+            <img src="https://img.shields.io/badge/LlamaIndex-FFB000?style=for-the-badge&logo=llama&logoColor=black" alt="LlamaIndex"/>
+            <img src="https://img.shields.io/badge/OpenAI%20API-412991?style=for-the-badge&logo=openai&logoColor=white" alt="OpenAI API"/>
+            <img src="https://img.shields.io/badge/HuggingFace-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black" alt="HF"/>
+            <img src="https://img.shields.io/badge/ChromaDB-8A2BE2?style=for-the-badge&logo=database&logoColor=white" alt="ChromaDB"/>
+            <img src="https://img.shields.io/badge/FAISS-0099E5?style=for-the-badge&logo=facebook&logoColor=white" alt="FAISS"/>
+            <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit"/>
+            <img src="https://img.shields.io/badge/Transformers-FFAE1A?style=for-the-badge&logo=transformers&logoColor=black" alt="Transformers"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:18px">
+        <h3>ML Frameworks</h3>
+        <p class="muted">PyTorch, TensorFlow, scikit‑learn, Keras, Random Forest, XGBoost, PySpark, JAX, MLFlow, MLOps, Caffe</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+          <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch"/>
+          <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" alt="TensorFlow"/>
+          <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white" alt="sklearn"/>
+          <img src="https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white" alt="Keras"/>
+          <img src="https://img.shields.io/badge/Random%20Forest-00796B?style=for-the-badge&logo=treehouse&logoColor=white" alt="RF"/>
+          <img src="https://img.shields.io/badge/XGBoost-E53935?style=for-the-badge&logo=xgboost&logoColor=white" alt="XGBoost"/>
+          <img src="https://img.shields.io/badge/PySpark-F59E0B?style=for-the-badge&logo=apache-spark&logoColor=white" alt="PySpark"/>
+          <img src="https://img.shields.io/badge/JAX-0052CC?style=for-the-badge&logo=google&logoColor=white" alt="JAX"/>
+          <img src="https://img.shields.io/badge/MLflow-0194E2?style=for-the-badge&logo=mlflow&logoColor=white" alt="MLflow"/>
+          <img src="https://img.shields.io/badge/MLOps-FF4088?style=for-the-badge&logo=azuredevops&logoColor=white" alt="MLOps"/>
+          <img src="https://img.shields.io/badge/Caffe-DB4437?style=for-the-badge&logo=google&logoColor=white" alt="Caffe"/>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <section id="contact" class="py-20">
-    <div class="max-w-xl mx-auto px-5 text-center reveal">
-      <h2 class="text-3xl md:text-4xl font-extrabold grad-text">Let's Build Together</h2>
-      <p class="mt-4 text-slate-600 dark:text-slate-400">I'm actively seeking new opportunities and collaborations where I can leverage my skills in AI and data science to create impactful solutions. Feel free to reach out!</p>
-      <div class="mt-8">
-        <a href="mailto:pd2782@columbia.edu" class="inline-block px-8 py-4 rounded-xl text-white font-semibold btn-primary hover:opacity-90 transition-opacity text-lg">
-          Email Me: pd2782@columbia.edu
-        </a>
-      </div>
-      <div class="mt-6 flex justify-center gap-6">
-        <a href="https://www.linkedin.com/in/prakhardungarwal/" target="_blank" class="text-slate-500 hover:text-blue-600 dark:hover:text-cyan-400">LinkedIn</a>
-        <span>•</span>
-        <a href="https://github.com/prakhar394" target="_blank" class="text-slate-500 hover:text-blue-600 dark:hover:text-cyan-400">GitHub</a>
-        <span>•</span>
-        <a href="https://www.datascienceportfol.io/prakhar_dungarwal" target="_blank" class="text-slate-500 hover:text-blue-600 dark:hover:text-cyan-400">Full Portfolio</a>
+  <div class="divider"></div>
+
+  <!-- EDUCATION (from resume) -->
+  <section id="education" class="section">
+    <div class="wrap">
+      <h2 class="title">Education</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <img class="logo" src="https://logo.clearbit.com/columbia.edu" alt="Columbia"/>
+            <h3 style="margin:0">Columbia University — M.S. in Data Science</h3>
+          </div>
+          <div class="muted">Aug 2024 – Dec 2025 • New York City, NY, USA • GPA: 3.8/4</div>
+          <p class="stack">Coursework: Applied Machine Learning, Deep Learning for NLP, Probability & Statistics, LLM‑Based Generative AI, Causal Inference</p>
+        </div>
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <img class="logo" src="https://logo.clearbit.com/vit.ac.in" alt="VIT"/>
+            <h3 style="margin:0">Vellore Institute of Technology — B.Tech CSE</h3>
+          </div>
+          <div class="muted">Jul 2018 – Jul 2022 • Vellore, IN • GPA: 3.96/4</div>
+          <p class="stack">Coursework: Data Structures & Algorithms, Computer Architecture, Parallel & Distributed Computing, Artificial Intelligence, Robotics</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <footer class="py-6 text-center text-sm text-slate-500 dark:text-slate-600 border-t border-slate-200 dark:border-slate-800">
-    <p>© <span id="year"></span> Prakhar Dungarwal. Coded with passion and a lot of coffee.</p>
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="wrap">
+      <h2 class="title">Contact</h2>
+      <div class="card" style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+        <div>
+          <div class="muted">Open to opportunities in Data Science, LLMs, RAG & Agentic AI.</div>
+          <div class="muted" style="margin-top:6px">San Francisco, CA • <a href="mailto:pd2782@columbia.edu">pd2782@columbia.edu</a> • (917) 217‑8276</div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn pill" href="https://www.linkedin.com/in/prakhardungarwal/" target="_blank">LinkedIn</a>
+          <a class="btn pill" href="https://www.datascienceportfol.io/prakhar_dungarwal" target="_blank">Portfolio</a>
+          <a class="btn pill" href="https://github.com/prakhar394" target="_blank">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap">© <span id="year"></span> Prakhar Dungarwal • Interactive portfolio • GitHub Pages ready</div>
   </footer>
 
+  <!-- Floating Chat Sidebar -->
+  <div class="chat-tab" id="chatTab" onclick="openChat()">Chat with PrakharBot</div>
+  <aside class="sidebar" id="sidebar" aria-live="polite">
+    <header>
+      <div class="side-title">
+        <img src="https://avatars.githubusercontent.com/u/14235555?v=4" alt="avatar"/>
+        <div>
+          PrakharBot<br><span class="status">online • resume‑aware</span>
+        </div>
+      </div>
+      <button class="btn-toggle" onclick="closeChat()" aria-label="Close chat">✕</button>
+    </header>
+    <div class="messages" id="messages">
+      <div class="msg a">
+        <img class="avatar-mini" src="https://avatars.githubusercontent.com/u/14235555?v=4" alt="mini"/>
+        <div class="bubble">Hey! I’m a friendly mini‑bot trained on my resume. Ask about <b>Adobe</b>, <b>Intuit</b>, <b>Columbia</b>, <b>Morgan&nbsp;Stanley</b>, <b>skills</b>, or <b>projects</b>.</div>
+      </div>
+      <div class="msg a"><div class="bubble">Shortcuts: <span class="pill-suggest" onclick="send('Adobe Research')">Adobe Research</span> <span class="pill-suggest" onclick="send('Intuit intern')">Intuit</span> <span class="pill-suggest" onclick="send('Columbia AC4')">Columbia AC4</span> <span class="pill-suggest" onclick="send('Morgan Stanley (RAG)')">Morgan Stanley</span> <span class="pill-suggest" onclick="send('Show skills')">Skills</span> <span class="pill-suggest" onclick="send('Show projects')">Projects</span></div></div>
+    </div>
+    <footer>
+      <input id="chatInput" placeholder="Ask anything… (e.g., How did you boost 40% accuracy?)" onkeydown="if(event.key==='Enter'){send(this.value); this.value='';}" />
+      <button class="btn primary pill" onclick="const i=document.getElementById('chatInput'); send(i.value); i.value='';">Send</button>
+    </footer>
+  </aside>
+
+  <!-- Diagnostics & Self-tests -->
+  <details id="tests" class="wrap" open>
+    <summary><strong>Diagnostics & Self‑Tests</strong> (safe to remove after deploy)</summary>
+    <div id="testResults">Running…</div>
+  </details>
+
   <script>
-    document.getElementById('year').innerText = new Date().getFullYear();
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Dark Mode Toggle
-    const modeBtn = document.getElementById('mode');
-    const userTheme = localStorage.getItem('theme');
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    const themeCheck = () => {
-      if (userTheme === 'dark' || (!userTheme && systemTheme)) {
-        document.documentElement.classList.add('dark');
-        modeBtn.textContent = '🌞';
-      } else {
-        modeBtn.textContent = '🌙';
-      }
-    };
-    
-    modeBtn.addEventListener('click', () => {
-      if (document.documentElement.classList.toggle('dark')) {
-        localStorage.setItem('theme', 'dark');
-        modeBtn.textContent = '🌞';
-      } else {
-        localStorage.setItem('theme', 'light');
-        modeBtn.textContent = '🌙';
-      }
-    });
-    
-    themeCheck();
+    // Theme toggle with persistence
+    const toggle = document.getElementById('toggle');
+    (function initTheme(){ const saved = localStorage.getItem('theme'); if(saved==='dark'){ document.body.classList.add('dark'); }})();
+    toggle.addEventListener('click',()=>{ document.body.classList.toggle('dark'); localStorage.setItem('theme', document.body.classList.contains('dark')?'dark':'light'); });
 
-    // Reveal on Scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
+    // Parse `data-intent` as "#hash <prompt with spaces>"
+    function parseIntent(intent){
+      const s = (intent||'').trim();
+      const i = s.indexOf(' ');
+      return i === -1 ? {hash:s, prompt:''} : {hash:s.slice(0,i), prompt:s.slice(i+1)};
+    }
+
+    // Chip → open section & seed chat (fixed to keep full prompt after first space)
+    document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
+      const {hash,prompt} = parseIntent(c.getAttribute('data-intent'));
+      if(hash) location.hash = hash;
+      if(prompt) { openChat(); send(prompt); }
+    }));
+
+    // Sidebar chat logic
+    const sidebar = document.getElementById('sidebar');
+    const chatTab = document.getElementById('chatTab');
+    function openChat(){ sidebar.classList.add('open'); chatTab.style.display='none'; setTimeout(()=>document.getElementById('chatInput').focus(),50); }
+    function closeChat(){ sidebar.classList.remove('open'); chatTab.style.display='block'; }
+    window.openChat = openChat; window.closeChat = closeChat;
+
+    // Chat engine (rule‑based; strictly aligned to provided resume)
+    const M = document.getElementById('messages');
+    function append(role, html){
+      const row = document.createElement('div'); row.className = 'msg ' + (role==='user'?'b':'a');
+      if(role==='user'){ const b=document.createElement('div'); b.className='bubble'; b.innerHTML = html; row.appendChild(b); }
+      else {
+        const av=document.createElement('img'); av.className='avatar-mini'; av.src='https://avatars.githubusercontent.com/u/14235555?v=4'; av.alt='mini'; row.appendChild(av);
+        const b=document.createElement('div'); b.className='bubble'; b.innerHTML = html; row.appendChild(b);
+      }
+      M.appendChild(row); M.scrollTop = M.scrollHeight; }
+
+    function spark(el){ // tiny emoji confetti
+      const star = document.createElement('div');
+      star.textContent = '✨'; star.style.position='absolute'; star.style.pointerEvents='none';
+      const r = el.getBoundingClientRect(); star.style.left = (r.left + r.width/2)+'px'; star.style.top=(r.top-8)+'px';
+      star.style.transition='all .8s ease'; star.style.transform='translateY(0)'; star.style.opacity='1'; document.body.appendChild(star);
+      requestAnimationFrame(()=>{ star.style.transform='translateY(-30px)'; star.style.opacity='0'; }); setTimeout(()=>star.remove(),820);
+    }
+
+    function send(text){
+      const q = (text||'').trim(); if(!q) return; append('user', q);
+      const it = document.createElement('div'); it.className='typing muted'; it.textContent='typing…'; M.appendChild(it); M.scrollTop=M.scrollHeight;
+      setTimeout(()=>{ M.removeChild(it); respond(q); }, 420);
+    }
+
+    function respond(q){
+      const t = q.toLowerCase();
+      if(t.includes('adobe')){
+        append('bot', '<b>Adobe Research — Generative AI Researcher</b><ul><li>Personalized multimodal LLMs with <b>GPT‑4o‑v</b> & <b>LLaVA</b>; 10+ eval factors reach <b>95% consistency</b> on image‑edit assessment.</li><li>Automated <b>MLLM‑as‑a‑Judge</b> with <b>RAG</b>, reasoning traces, agentic tool binding → judgment accuracy ↑ <b>20%</b>.</li></ul>');
+        return;
+      }
+      if(t.includes('intuit')){
+        append('bot', '<b>Intuit — AI & Data Science Intern</b><ul><li>Agentic AI with <b>LangGraph</b> + <b>ReAct</b> → ground‑truth annotation time ↓ <b>50%</b>.</li><li>Used <b>GPT‑4.5</b> & <b>Claude‑3.5‑Sonnet</b> with CoT + LLM‑as‑a‑Judge → recall ↑ <b>30%</b>.</li></ul>');
+        return;
+      }
+      if(t.includes('columbia')||t.includes('ac4')){
+        append('bot','<b>Columbia University (AC4 Lab) — AI & ML Researcher</b><ul><li>Fine‑tuned <b>RoBERTa</b> on <b>GoEmotions</b>; integrated <b>DeepSeek‑R1</b> & <b>GPT‑4o</b> → target <b>30%</b> reduction in non‑peaceful watch time.</li><li>Cloud backend for a Chrome extension using <b>AWS</b> (S3, EC2), <b>LangChain</b>, YouTube APIs.</li></ul>');
+        return;
+      }
+      if(t.includes('morgan')){
+        append('bot','<b>Morgan Stanley — Senior Data Scientist (Jan 2022 – Aug 2024)</b><ul><li><b>RAG</b> chatbot (<b>LLaMA‑3.1‑8B‑Instruct</b>, <b>all‑mpnet‑base‑v2</b>) → query resolution ↓ <b>60%</b>, ops cost ↓ <b>30%</b>.</li><li>Hybrid <b>CNN + Exponential Smoothing + Prophet</b> forecasting → accuracy ↑ <b>20%</b> (~ <b>$1M</b> savings).</li><li>Ran daily ML/DS ops; enterprise data‑center analytics → annual spend ↓ <b>20%</b>.</li></ul>');
+        return;
+      }
+      if(t.includes('skills')){
+        append('bot','<b>Skills</b><ul><li><b>Programming & Tools:</b> Python, SQL, R, C, C++, Go, Docker, Git, Streamlit, AWS, Azure, Snowpark, Pandas, NumPy</li><li><b>Specialized Techniques:</b> Machine Learning, AI Agents, Reinforcement Learning, LLMs, A/B Testing, RAG, Generative AI</li><li><b>LLM Tools & Frameworks:</b> LangChain, LlamaIndex, OpenAI API, Hugging Face, ChromaDB, FAISS, Streamlit, Transformer</li><li><b>ML Frameworks:</b> PyTorch, TensorFlow, scikit‑learn, Keras, Random Forest, XGBoost, PySpark, JAX, MLFlow, MLOps, Caffe</li></ul>');
+        return;
+      }
+      if(t.includes('project')||t.includes('cinegraph')||t.includes('cart')){
+        append('bot','<b>Projects</b><ul><li><b>CineGraphRAG — MCP Agent:</b> NL → Cypher, explainable subgraphs; accuracy ↑ <b>40%</b>, speed <b>3×</b>; relevance ↑ <b>25%</b>.</li><li><b>CART — Context‑Aware Rendition:</b> QA chatbot; fuzzy matching + cosine similarity; speed ↑ <b>30%</b>; fine‑tuned on QA LLMs.</li></ul>');
+        return;
+      }
+      if(t.includes('education')){
+        append('bot','<b>Education</b><ul><li><b>Columbia University:</b> M.S. Data Science (GPA 3.8/4), Aug 2024 – Dec 2025 — Applied ML, DL for NLP, Probability & Statistics, LLM‑Based Gen AI, Causal Inference.</li><li><b>VIT:</b> B.Tech CSE (GPA 3.96/4), Jul 2018 – Jul 2022 — DSA, Computer Architecture, Parallel & Distributed Computing, AI, Robotics.</li></ul>');
+        return;
+      }
+      if(t.includes('contact')||t.includes('email')){ append('bot','San Francisco, CA • <a href="mailto:pd2782@columbia.edu">pd2782@columbia.edu</a> • (917) 217‑8276'); return; }
+      append('bot','Try asking about <b>Adobe</b>, <b>Intuit</b>, <b>Columbia AC4</b>, <b>Morgan Stanley</b>, <b>skills</b>, or <b>projects</b>.');
+    }
+
+    // expose send for external buttons
+    window.send = send;
+
+    // -----------------
+    // Self-tests (simple runtime checks)
+    // -----------------
+    const out = document.getElementById('testResults');
+    function log(msg, cls){ const p=document.createElement('div'); p.textContent=msg; if(cls) p.className=cls; out.appendChild(p); }
+    function ok(name){ log('✔ ' + name, 'ok'); }
+    function fail(name, err){ log('✘ ' + name + ' — ' + (err && err.message || err), 'fail'); }
+    function test(name, fn){ try{ fn(); ok(name); } catch(e){ fail(name, e); } }
+
+    // Tests
+    test('Sections present', ()=>{
+      ['experience','projects','skills','education','contact'].forEach(id=>{
+        if(!document.getElementById(id)) throw new Error('#'+id+' missing');
       });
-    }, { threshold: 0.1 });
+    });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    test('Dark mode styles applied', ()=>{
+      document.body.classList.add('dark');
+      const btn = document.createElement('button'); btn.className='btn'; document.body.appendChild(btn);
+      const color = getComputedStyle(btn).color; // should not be rgb(255, 255, 255) on white bg; just ensure it exists
+      if(!color) throw new Error('no color computed');
+      document.body.removeChild(btn); document.body.classList.remove('dark');
+    });
+
+    test('parseIntent keeps full prompt', ()=>{
+      const {hash,prompt} = parseIntent('#experience Adobe Research');
+      if(hash !== '#experience') throw new Error('hash incorrect');
+      if(prompt !== 'Adobe Research') throw new Error('prompt incorrect: '+prompt);
+    });
+
+    // Async test for chat responses
+    (function(){
+      const before = M.childElementCount;
+      respond('Adobe');
+      setTimeout(()=>{
+        try{ if(M.childElementCount <= before) throw new Error('no response appended'); ok('Chat responds to "Adobe"'); }
+        catch(e){ fail('Chat responds to "Adobe"', e); }
+      }, 500);
+    })();
   </script>
 </body>
 </html>
