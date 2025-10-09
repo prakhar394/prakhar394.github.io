@@ -65,7 +65,7 @@
 
     /* AVATAR & LOGOS */
     .avatar{width:260px;height:260px;border-radius:50%;object-fit:cover;border:1px solid var(--line);box-shadow:var(--shadow)}
-    .logo{width:28px;height:28px;border-radius:6px;object-fit:contain;border:1px solid var(--line);background:#fff;margin-right:8px;transition:transform .18s, box-shadow .18s}
+    .logo{width:30px;height:30px;border-radius:6px;object-fit:contain;border:1px solid var(--line);background:#fff;margin-right:8px;transition:transform .18s, box-shadow .18s}
     .logo:hover{transform:scale(1.06);box-shadow:var(--glow)}
     body.dark .logo{background:#fff}
 
@@ -77,37 +77,37 @@
     .muted{color:var(--muted)}
 
     /* PROJECT CARD (image-left) */
-    .project{display:flex;flex-direction:column;gap:18px;border:1px solid var(--line);background:var(--card-bg);border-radius:16px;box-shadow:var(--shadow);padding:16px;overflow:hidden}
+    .projects-grid{gap:28px}
+    .project{display:flex;flex-direction:column;gap:18px;border:1px solid var(--line);background:var(--card-bg);border-radius:16px;box-shadow:var(--shadow);padding:18px;overflow:hidden}
     .project img{width:100%;height:220px;object-fit:cover;border-radius:12px}
     .project h3{margin:0 0 6px 0}
     .project .summary{color:#334155}
     .project .actions{margin-top:8px}
+    .project + .project{margin-top:2px}
     @media(min-width:880px){
       .project{flex-direction:row}
       .project img{width:380px;height:240px}
       .project .body{flex:1}
     }
 
-    /* EXPERIENCE TIMELINE (aligned dots + scroll motion) */
-    .timeline{position:relative;margin-left:10px;padding-left:28px}
-    .timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--line);} /* main line */
-    .timeline-item{position:relative;margin:28px 0}
+    /* EXPERIENCE TIMELINE (aligned dots + motion) */
+    .timeline{position:relative;padding-left:48px}
+    .timeline::before{content:"";position:absolute;left:24px;top:0;bottom:0;width:2px;background:var(--line)}
+    .timeline-item{position:relative;margin:32px 0 36px;padding-top:2px}
     .timeline-item::before{
-      content:"";position:absolute;left:10px;top:10px;transform:translate(-50%,-50%) scale(.7);
-      width:12px;height:12px;background:#fff;border:2px solid #94a3b8;border-radius:999px;transition:transform .5s ease, box-shadow .5s ease;
-      box-shadow:0 0 0 0 rgba(37,99,235,0);
+      content:"";position:absolute;left:24px;top:14px;width:12px;height:12px;
+      transform:translate(-50%,-50%) scale(.78);
+      background:#fff;border:2px solid #94a3b8;border-radius:50%;
+      transition:transform .45s ease, box-shadow .45s ease; box-shadow:0 0 0 0 rgba(37,99,235,0);
     }
-    .timeline-item.visible::before{
-      transform:translate(-50%,-50%) scale(1);
-      box-shadow:0 0 0 8px rgba(37,99,235,.08);
-    }
+    .timeline-item.visible::before{transform:translate(-50%,-50%) scale(1);box-shadow:0 0 0 8px rgba(37,99,235,.08)}
     .exp-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-    .exp-title{margin:2px 0 2px 0;font-weight:800}
-    .exp-role{margin:2px 0;color:#334155;font-weight:600}
-    .exp-meta{color:var(--muted);font-size:14px;margin:4px 0 10px 0}
-    .list{margin:8px 0 0 18px;color:#233047}
-    body.dark .list{color:#c9d3e5}
+    .exp-title{margin:0;font-weight:800}
+    .exp-role{margin:6px 0 0;color:#334155;font-weight:700}
+    .exp-meta{color:var(--muted);font-size:14px;margin:2px 0 8px}
+    .list{margin:10px 0 0 18px}
     .list li{margin:6px 0}
+    body.dark .list{color:#c9d3e5}
 
     /* Chat Sidebar */
     .chat-tab{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:60;background:var(--accent);color:#fff;padding:10px 12px;border-radius:10px 0 0 10px;font-weight:800;cursor:pointer;writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:.6px;box-shadow:0 10px 26px rgba(0,0,0,.25)}
@@ -142,6 +142,12 @@
     }
     body.dark #typewriter::after{ background:#e5e7eb }
     @keyframes blink{50%{opacity:0}}
+
+    /* Skills spacing & badge sizing */
+    .skills-grid{display:grid;gap:18px}
+    @media(min-width:900px){ .skills-grid{grid-template-columns:1fr 1fr} }
+    .badge-wrap{display:flex;flex-wrap:wrap;gap:10px 12px;margin-top:12px}
+    .badge-wrap img{height:32px}
   </style>
 </head>
 
@@ -161,7 +167,7 @@
     </div>
   </nav>
 
-  <!-- HERO (photo left, typewriter right, chips updated) -->
+  <!-- HERO -->
   <header class="section">
     <div class="wrap">
       <div class="row row-2">
@@ -175,6 +181,17 @@
             Hi, I’m <span style="color:var(--accent)">Prakhar Dungarwal</span> 👋
           </h1>
           <h2 id="typewriter" class="lead" style="font-size:22px;color:var(--muted);min-height:34px;"></h2>
+
+          <!-- NEW SUMMARY -->
+          <p class="lead" style="margin-top:8px;max-width:68ch">
+            🎓 MS in Data Science @ Columbia University. <br>
+            📊 I turn data into intelligence, models into products, and AI research into scalable systems—grounded in solid ML:
+            experimental design & A/B testing, feature engineering, NLP, time-series forecasting, and model evaluation. <br>
+            💡 Passionate about LLMs, agentic AI, RAG, and applied data science that drives measurable real-world impact.
+          </p>
+          <p class="muted" style="max-width:68ch;margin-top:6px">
+            <em>“Data science isn’t just about prediction — it’s about understanding the story the data wants to tell.”</em>
+          </p>
 
           <div class="chips" style="margin:16px 0 8px 0">
             <span class="chip" data-intent="#experience">Data Science</span>
@@ -206,7 +223,7 @@
     <div class="wrap">
       <h2 class="title reveal">Data Science Projects</h2>
 
-      <div class="grid" style="gap:20px">
+      <div class="grid projects-grid">
         <article class="project reveal">
           <img src="img/project1.jpg" alt="CineGraphRAG cover">
           <div class="body">
@@ -268,7 +285,7 @@
 
   <div class="divider"></div>
 
-  <!-- EXPERIENCE (timeline with aligned dots + motion; content replaced as provided) -->
+  <!-- EXPERIENCE -->
   <section id="experience" class="section">
     <div class="wrap">
       <h2 class="title reveal">Experience</h2>
@@ -346,94 +363,90 @@
 
   <div class="divider"></div>
 
-  <!-- SKILLS (full set) -->
-    <section id="skills" class="section">
-      <div class="wrap">
-        <h2 class="title reveal">Skills & Interests</h2>
-    
-        <!-- Programming & Tools -->
-        <div class="card reveal">
-          <h3>Programming & Tools</h3>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
-            <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
-            <img src="https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=postgresql&logoColor=white" alt="SQL"/>
-            <img src="https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white" alt="R"/>
-            <img src="https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white" alt="C"/>
-            <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white" alt="C++"/>
-            <img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="Go"/>
-            <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git"/>
-            <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"/>
-            <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit"/>
-            <img src="https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white" alt="AWS"/>
-            <img src="https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white" alt="Azure"/>
-            <img src="https://img.shields.io/badge/Snowpark-29B5E8?style=for-the-badge&logo=snowflake&logoColor=white" alt="Snowpark"/>
-            <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas"/>
-            <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy"/>
-            <img src="https://img.shields.io/badge/Prophet-000000?style=for-the-badge&logo=clockify&logoColor=white" alt="Prophet"/>
-            <img src="https://img.shields.io/badge/Neo4j-018BFF?style=for-the-badge&logo=neo4j&logoColor=white" alt="Neo4j"/>
-          </div>
+  <!-- SKILLS -->
+  <section id="skills" class="section">
+    <div class="wrap">
+      <h2 class="title reveal">Skills & Interests</h2>
+
+      <div class="card reveal">
+        <h3>Programming & Tools</h3>
+        <div class="badge-wrap">
+          <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
+          <img src="https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=postgresql&logoColor=white" alt="SQL"/>
+          <img src="https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white" alt="R"/>
+          <img src="https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white" alt="C"/>
+          <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white" alt="C++"/>
+          <img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="Go"/>
+          <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git"/>
+          <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"/>
+          <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit"/>
+          <img src="https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white" alt="AWS"/>
+          <img src="https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white" alt="Azure"/>
+          <img src="https://img.shields.io/badge/Snowpark-29B5E8?style=for-the-badge&logo=snowflake&logoColor=white" alt="Snowpark"/>
+          <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas"/>
+          <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy"/>
+          <img src="https://img.shields.io/badge/Prophet-000000?style=for-the-badge&logo=clockify&logoColor=white" alt="Prophet"/>
+          <img src="https://img.shields.io/badge/Neo4j-018BFF?style=for-the-badge&logo=neo4j&logoColor=white" alt="Neo4j"/>
         </div>
-    
-        <!-- Techniques + LLM Tools -->
-        <div class="grid grid-2" style="margin-top:18px">
-          <div class="card reveal">
-            <h3>Specialized Techniques</h3>
-            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
-              <img src="https://img.shields.io/badge/Machine%20Learning-102230?style=for-the-badge&logo=python&logoColor=white" alt="ML"/>
-              <img src="https://img.shields.io/badge/Deep%20Learning-111827?style=for-the-badge&logo=tensorflow&logoColor=white" alt="DL"/>
-              <img src="https://img.shields.io/badge/NLP-0A66C2?style=for-the-badge&logo=bookstack&logoColor=white" alt="NLP"/>
-              <img src="https://img.shields.io/badge/Computer%20Vision-2C7BE5?style=for-the-badge&logo=opencv&logoColor=white" alt="CV"/>
-              <img src="https://img.shields.io/badge/AI%20Agents-FFB6C1?style=for-the-badge&logo=react&logoColor=black" alt="AI Agents"/>
-              <img src="https://img.shields.io/badge/Reinforcement%20Learning-0052CC?style=for-the-badge&logo=openai&logoColor=white" alt="RL"/>
-              <img src="https://img.shields.io/badge/RAG-1976D2?style=for-the-badge&logo=neo4j&logoColor=white" alt="RAG"/>
-              <img src="https://img.shields.io/badge/A%2FB%20Testing-EC407A?style=for-the-badge&logo=chartdotjs&logoColor=white" alt="A/B"/>
-              <img src="https://img.shields.io/badge/Time%20Series-9C27B0?style=for-the-badge&logo=clockify&logoColor=white" alt="Time Series"/>
-              <img src="https://img.shields.io/badge/Hybrid%20Forecasting-7E57C2?style=for-the-badge&logo=simpleanalytics&logoColor=white" alt="Hybrid Forecasting"/>
-            </div>
-          </div>
-    
-          <div class="card reveal">
-            <h3>LLM Tools & Frameworks</h3>
-            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
-              <img src="https://img.shields.io/badge/LangChain-000000?style=for-the-badge&logo=python&logoColor=white" alt="LangChain"/>
-              <img src="https://img.shields.io/badge/LlamaIndex-FFB000?style=for-the-badge&logo=llama&logoColor=black" alt="LlamaIndex"/>
-              <img src="https://img.shields.io/badge/LangGraph-0F766E?style=for-the-badge&logo=graphql&logoColor=white" alt="LangGraph"/>
-              <img src="https://img.shields.io/badge/ReAct-1F2937?style=for-the-badge&logo=gitbook&logoColor=white" alt="ReAct"/>
-              <img src="https://img.shields.io/badge/OpenAI%20API-412991?style=for-the-badge&logo=openai&logoColor=white" alt="OpenAI"/>
-              <img src="https://img.shields.io/badge/HuggingFace-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black" alt="HF"/>
-              <img src="https://img.shields.io/badge/Transformers-FFAE1A?style=for-the-badge&logo=transformers&logoColor=black" alt="Transformers"/>
-              <img src="https://img.shields.io/badge/ChromaDB-8A2BE2?style=for-the-badge&logo=database&logoColor=white" alt="ChromaDB"/>
-              <img src="https://img.shields.io/badge/FAISS-0099E5?style=for-the-badge&logo=meta&logoColor=white" alt="FAISS"/>
-              <img src="https://img.shields.io/badge/MLLM%20(LLava%2FGPT--4o--v)-2E7D32?style=for-the-badge&logo=image&logoColor=white" alt="MLLMs"/>
-              <img src="https://img.shields.io/badge/LLaMA--3.1-111827?style=for-the-badge&logo=alpinedotjs&logoColor=white" alt="LLaMA"/>
-              <img src="https://img.shields.io/badge/all--mpnet--base--v2-0EA5E9?style=for-the-badge&logo=vectorworks&logoColor=white" alt="mpnet"/>
-            </div>
-          </div>
-        </div>
-    
-        <!-- ML Frameworks -->
-        <div class="card reveal" style="margin-top:18px">
-          <h3>ML Frameworks</h3>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
-            <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch"/>
-            <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" alt="TensorFlow"/>
-            <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white" alt="scikit-learn"/>
-            <img src="https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white" alt="Keras"/>
-            <img src="https://img.shields.io/badge/Random%20Forest-00796B?style=for-the-badge&logo=treehouse&logoColor=white" alt="Random Forest"/>
-            <img src="https://img.shields.io/badge/XGBoost-E53935?style=for-the-badge&logo=xgboost&logoColor=white" alt="XGBoost"/>
-            <img src="https://img.shields.io/badge/PySpark-F59E0B?style=for-the-badge&logo=apache-spark&logoColor=white" alt="PySpark"/>
-            <img src="https://img.shields.io/badge/JAX-0052CC?style=for-the-badge&logo=google&logoColor=white" alt="JAX"/>
-            <img src="https://img.shields.io/badge/MLflow-0194E2?style=for-the-badge&logo=mlflow&logoColor=white" alt="MLflow"/>
-            <img src="https://img.shields.io/badge/MLOps-FF4088?style=for-the-badge&logo=azuredevops&logoColor=white" alt="MLOps"/>
-            <img src="https://img.shields.io/badge/Caffe-DB4437?style=for-the-badge&logo=google&logoColor=white" alt="Caffe"/>
-            <img src="https://img.shields.io/badge/Prophet-000000?style=for-the-badge&logo=clockify&logoColor=white" alt="Prophet"/>
-            <img src="https://img.shields.io/badge/CRNN/Seq%20Models-4B5563?style=for-the-badge&logo=readthedocs&logoColor=white" alt="CRNN"/>
-            <img src="https://img.shields.io/badge/RoBERTa-1C64F2?style=for-the-badge&logo=readme&logoColor=white" alt="RoBERTa"/>
-          </div>
-        </div>
-    
       </div>
-    </section>
+
+      <div class="skills-grid" style="margin-top:18px">
+        <div class="card reveal">
+          <h3>Specialized Techniques</h3>
+          <div class="badge-wrap">
+            <img src="https://img.shields.io/badge/Machine%20Learning-102230?style=for-the-badge&logo=python&logoColor=white" alt="ML"/>
+            <img src="https://img.shields.io/badge/Deep%20Learning-111827?style=for-the-badge&logo=tensorflow&logoColor=white" alt="DL"/>
+            <img src="https://img.shields.io/badge/NLP-0A66C2?style=for-the-badge&logo=bookstack&logoColor=white" alt="NLP"/>
+            <img src="https://img.shields.io/badge/Computer%20Vision-2C7BE5?style=for-the-badge&logo=opencv&logoColor=white" alt="CV"/>
+            <img src="https://img.shields.io/badge/AI%20Agents-FFB6C1?style=for-the-badge&logo=react&logoColor=black" alt="AI Agents"/>
+            <img src="https://img.shields.io/badge/Reinforcement%20Learning-0052CC?style=for-the-badge&logo=openai&logoColor=white" alt="RL"/>
+            <img src="https://img.shields.io/badge/RAG-1976D2?style=for-the-badge&logo=neo4j&logoColor=white" alt="RAG"/>
+            <img src="https://img.shields.io/badge/A%2FB%20Testing-EC407A?style=for-the-badge&logo=chartdotjs&logoColor=white" alt="A/B"/>
+            <img src="https://img.shields.io/badge/Time%20Series-9C27B0?style=for-the-badge&logo=clockify&logoColor=white" alt="Time Series"/>
+            <img src="https://img.shields.io/badge/Hybrid%20Forecasting-7E57C2?style=for-the-badge&logo=simpleanalytics&logoColor=white" alt="Hybrid Forecasting"/>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <h3>LLM Tools & Frameworks</h3>
+          <div class="badge-wrap">
+            <img src="https://img.shields.io/badge/LangChain-000000?style=for-the-badge&logo=python&logoColor=white" alt="LangChain"/>
+            <img src="https://img.shields.io/badge/LlamaIndex-FFB000?style=for-the-badge&logo=llama&logoColor=black" alt="LlamaIndex"/>
+            <img src="https://img.shields.io/badge/LangGraph-0F766E?style=for-the-badge&logo=graphql&logoColor=white" alt="LangGraph"/>
+            <img src="https://img.shields.io/badge/ReAct-1F2937?style=for-the-badge&logo=gitbook&logoColor=white" alt="ReAct"/>
+            <img src="https://img.shields.io/badge/OpenAI%20API-412991?style=for-the-badge&logo=openai&logoColor=white" alt="OpenAI"/>
+            <img src="https://img.shields.io/badge/HuggingFace-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black" alt="HF"/>
+            <img src="https://img.shields.io/badge/Transformers-FFAE1A?style=for-the-badge&logo=transformers&logoColor=black" alt="Transformers"/>
+            <img src="https://img.shields.io/badge/ChromaDB-8A2BE2?style=for-the-badge&logo=database&logoColor=white" alt="ChromaDB"/>
+            <img src="https://img.shields.io/badge/FAISS-0099E5?style=for-the-badge&logo=meta&logoColor=white" alt="FAISS"/>
+            <img src="https://img.shields.io/badge/MLLM%20(LLava%2FGPT--4o--v)-2E7D32?style=for-the-badge&logo=image&logoColor=white" alt="MLLMs"/>
+            <img src="https://img.shields.io/badge/LLaMA--3.1-111827?style=for-the-badge&logo=alpinedotjs&logoColor=white" alt="LLaMA"/>
+            <img src="https://img.shields.io/badge/all--mpnet--base--v2-0EA5E9?style=for-the-badge&logo=vectorworks&logoColor=white" alt="mpnet"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="card reveal" style="margin-top:18px">
+        <h3>ML Frameworks</h3>
+        <div class="badge-wrap">
+          <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch"/>
+          <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" alt="TensorFlow"/>
+          <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white" alt="scikit-learn"/>
+          <img src="https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white" alt="Keras"/>
+          <img src="https://img.shields.io/badge/Random%20Forest-00796B?style=for-the-badge&logo=treehouse&logoColor=white" alt="Random Forest"/>
+          <img src="https://img.shields.io/badge/XGBoost-E53935?style=for-the-badge&logo=xgboost&logoColor=white" alt="XGBoost"/>
+          <img src="https://img.shields.io/badge/PySpark-F59E0B?style=for-the-badge&logo=apache-spark&logoColor=white" alt="PySpark"/>
+          <img src="https://img.shields.io/badge/JAX-0052CC?style=for-the-badge&logo=google&logoColor=white" alt="JAX"/>
+          <img src="https://img.shields.io/badge/MLflow-0194E2?style=for-the-badge&logo=mlflow&logoColor=white" alt="MLflow"/>
+          <img src="https://img.shields.io/badge/MLOps-FF4088?style=for-the-badge&logo=azuredevops&logoColor=white" alt="MLOps"/>
+          <img src="https://img.shields.io/badge/Caffe-DB4437?style=for-the-badge&logo=google&logoColor=white" alt="Caffe"/>
+          <img src="https://img.shields.io/badge/CRNN/Seq%20Models-4B5563?style=for-the-badge&logo=readthedocs&logoColor=white" alt="CRNN"/>
+          <img src="https://img.shields.io/badge/RoBERTa-1C64F2?style=for-the-badge&logo=readme&logoColor=white" alt="RoBERTa"/>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <div class="divider"></div>
 
@@ -482,7 +495,7 @@
     </div>
   </section>
 
-  <!-- PERSONAL OUTRO (moved AFTER contact) -->
+  <!-- PERSONAL OUTRO -->
   <section class="section">
     <div class="wrap">
       <p class="lead reveal" style="text-align:center;font-size:18px;color:var(--muted);">
@@ -540,15 +553,15 @@
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
 
-    // Typewriter roles + moving cursor (cursor handled by CSS ::after)
+    // Typewriter roles + moving cursor
     const roles = ["Data Scientist", "AI Engineer", "Machine Learning Engineer", "LLM Enthusiast", "F1 Fanatic"];
     (function typewriterInit(){
       const el = document.getElementById("typewriter");
       let i=0, j=0, del=false;
-      const speed=100, hold=1500;
+      const speed=85, hold=1200;
       function tick(){
         const t = roles[i];
-        el.textContent = t.substring(0, j); // cursor always sits at the end via ::after
+        el.textContent = t.substring(0, j);
         if(!del && j++ === t.length){ del=true; return setTimeout(tick, hold); }
         if(del && j-- === 0){ del=false; i=(i+1)%roles.length; return setTimeout(tick, 300); }
         setTimeout(tick, del ? 50 : speed);
