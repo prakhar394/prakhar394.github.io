@@ -90,24 +90,32 @@
       .project .body{flex:1}
     }
 
-    /* EXPERIENCE TIMELINE (aligned dots + motion) */
-    .timeline{position:relative;padding-left:48px}
-    .timeline::before{content:"";position:absolute;left:24px;top:0;bottom:0;width:2px;background:var(--line)}
-    .timeline-item{position:relative;margin:32px 0 36px;padding-top:2px}
-    .timeline-item::before{
-      content:"";position:absolute;left:24px;top:14px;width:12px;height:12px;
-      transform:translate(-50%,-50%) scale(.78);
-      background:#fff;border:2px solid #94a3b8;border-radius:50%;
-      transition:transform .45s ease, box-shadow .45s ease; box-shadow:0 0 0 0 rgba(37,99,235,0);
+    /* EXPERIENCE CARDS (timeline removed) */
+    .xp-list{display:grid;gap:18px}
+    .xp-card{
+      border:1px solid var(--line);
+      background:var(--card-bg);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:18px 18px 12px;
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s;
     }
-    .timeline-item.visible::before{transform:translate(-50%,-50%) scale(1);box-shadow:0 0 0 8px rgba(37,99,235,.08)}
-    .exp-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-    .exp-title{margin:0;font-weight:800}
-    .exp-role{margin:6px 0 0;color:#334155;font-weight:700}
-    .exp-meta{color:var(--muted);font-size:14px;margin:2px 0 8px}
-    .list{margin:10px 0 0 18px}
-    .list li{margin:6px 0}
-    body.dark .list{color:#c9d3e5}
+    .xp-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.12);border-color:rgba(37,99,235,.25)}
+    .xp-head{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px}
+    .xp-logo{width:36px;height:36px;border-radius:10px;object-fit:contain;border:1px solid var(--line);background:#fff}
+    .xp-company{margin:0;font-weight:800}
+    .xp-sub{margin-top:2px;color:var(--muted)}
+    .xp-role{font-weight:700;color:#334155}
+    .xp-badge{
+      font-size:12px;font-weight:700;white-space:nowrap;
+      padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--chip);
+    }
+    .xp-points{margin:12px 0 4px 24px}
+    .xp-points li{margin:6px 0}
+    @media(max-width:680px){
+      .xp-head{grid-template-columns:auto 1fr;gap:10px}
+      .xp-badge{grid-column:1 / -1;justify-self:start;margin-top:4px}
+    }
 
     /* Chat Sidebar */
     .chat-tab{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:60;background:var(--accent);color:#fff;padding:10px 12px;border-radius:10px 0 0 10px;font-weight:800;cursor:pointer;writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:.6px;box-shadow:0 10px 26px rgba(0,0,0,.25)}
@@ -182,7 +190,7 @@
           </h1>
           <h2 id="typewriter" class="lead" style="font-size:22px;color:var(--muted);min-height:34px;"></h2>
 
-          <!-- NEW SUMMARY -->
+          <!-- HERO SUMMARY -->
           <p class="lead" style="margin-top:8px;max-width:68ch">
             🎓 MS in Data Science @ Columbia University. <br>
             📊 I turn data into intelligence, models into products, and AI research into scalable systems—grounded in solid ML:
@@ -225,7 +233,7 @@
 
       <div class="grid projects-grid">
         <article class="project reveal">
-          <img src="img/project1.jpg" alt="CineGraphRAG cover">
+          <img src="img/project1.jpg" alt="CineGraphRAG cover" loading="lazy">
           <div class="body">
             <h3>CineGraphRAG — MCP Agent for Movie Recommendations</h3>
             <p class="summary">
@@ -239,7 +247,7 @@
         </article>
 
         <article class="project reveal">
-          <img src="img/project2.jpg" alt="CART cover">
+          <img src="img/project2.jpg" alt="CART cover" loading="lazy">
           <div class="body">
             <h3>CART — Context-Aware Rendition with Transformers</h3>
             <p class="summary">
@@ -253,7 +261,7 @@
         </article>
 
         <article class="project reveal">
-          <img src="img/project3.jpg" alt="BRSR Parser cover">
+          <img src="img/project3.jpg" alt="BRSR Parser cover" loading="lazy">
           <div class="body">
             <h3>BRSR Parser — ESG Reporting Toolkit</h3>
             <p class="summary">
@@ -267,7 +275,7 @@
         </article>
 
         <article class="project reveal">
-          <img src="img/project4.jpg" alt="HCR cover">
+          <img src="img/project4.jpg" alt="HCR cover" loading="lazy">
           <div class="body">
             <h3>Handwritten Character Recognition (CRNN-LSTM)</h3>
             <p class="summary">
@@ -285,78 +293,84 @@
 
   <div class="divider"></div>
 
-  <!-- EXPERIENCE -->
+  <!-- EXPERIENCE (cards) -->
   <section id="experience" class="section">
     <div class="wrap">
       <h2 class="title reveal">Experience</h2>
-      <div class="timeline">
 
-        <!-- Adobe Research -->
-        <div class="timeline-item reveal">
-          <div class="exp-head">
-            <img class="logo" src="https://blog.adobe.com/en/publish/2020/05/28/media_1d87bf78b1ce19defbef0c7858b4df696215a4048.png?width=750&format=png&optimize=medium"
+      <div class="xp-list">
+        <!-- Adobe -->
+        <article class="xp-card reveal">
+          <header class="xp-head">
+            <img class="xp-logo" src="https://blog.adobe.com/en/publish/2020/05/28/media_1d87bf78b1ce19defbef0c7858b4df696215a4048.png?width=750&format=png&optimize=medium"
                  onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Adobe_Systems_logo_and_wordmark.svg/512px-Adobe_Systems_logo_and_wordmark.svg.png';"
-                 alt="Adobe"/>
-            <span class="exp-title">Adobe Research — New York, NY, USA</span>
-          </div>
-          <div class="exp-role">Generative AI Researcher</div>
-          <div class="exp-meta">Aug 2025 – Present</div>
-          <ul class="list">
-            <li>Developing personalized multimodal LLM frameworks using <b>GPT-4o-v</b> and <b>LLava</b>, defining 10+ evaluation factors to quantitatively assess image edits with <b>95% consistency</b> across datasets.</li>
-            <li>Building automated <b>MLLM-as-a-Judge</b> pipelines leveraging <b>RAG</b>, reasoning traces, and agentic tool binding, improving model judgment accuracy by <b>20%</b> and enabling scalable, research-grade evaluation.</li>
+                 alt="Adobe">
+            <div class="xp-meta">
+              <h3 class="xp-company">Adobe Research</h3>
+              <div class="xp-sub">New York, NY, USA • <span class="xp-role">Generative AI Researcher</span></div>
+            </div>
+            <span class="xp-badge">Aug 2025 – Present</span>
+          </header>
+          <ul class="xp-points">
+            <li>Developing personalized multimodal LLM frameworks using <b>GPT-4o-v</b> and <b>LLava</b>, defining 10+ evaluation factors for image-edit assessment with <b>95% consistency</b>.</li>
+            <li>Building automated <b>MLLM-as-a-Judge</b> pipelines with <b>RAG</b>, reasoning traces, and agentic tool binding, improving judgment accuracy by <b>20%</b>.</li>
           </ul>
-        </div>
+        </article>
 
         <!-- Intuit -->
-        <div class="timeline-item reveal">
-          <div class="exp-head">
-            <img class="logo" src="https://logo.clearbit.com/intuit.com"
+        <article class="xp-card reveal">
+          <header class="xp-head">
+            <img class="xp-logo" src="https://logo.clearbit.com/intuit.com"
                  onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Intuit_Logo.svg/512px-Intuit_Logo_1.svg.png';"
-                 alt="Intuit"/>
-            <span class="exp-title">Intuit — Mountain View, CA, USA</span>
-          </div>
-          <div class="exp-role">AI & Data Science Intern</div>
-          <div class="exp-meta">May 2025 – Present</div>
-          <ul class="list">
-            <li>Developed an Agentic AI framework using <b>LangGraph</b> and <b>ReAct</b>-based multi-agent framework to enhance customer success metrics, reducing ground-truth annotation time by <b>50%</b> via agent orchestration and internal AI tools.</li>
-            <li>Utilized <b>GPT-4.5</b> and <b>Claude-3.5-Sonnet</b> to extract business quality markers from call transcripts, improving recall by <b>30%</b> over traditional NLP models by deploying Chain-of-Thought (CoT) and LLM-as-a-Judge based evaluation.</li>
+                 alt="Intuit">
+            <div class="xp-meta">
+              <h3 class="xp-company">Intuit</h3>
+              <div class="xp-sub">Mountain View, CA, USA • <span class="xp-role">AI & Data Science Intern</span></div>
+            </div>
+            <span class="xp-badge">May 2025 – Present</span>
+          </header>
+          <ul class="xp-points">
+            <li>Built an Agentic AI framework using <b>LangGraph</b> and <b>ReAct</b> multi-agent orchestration; reduced ground-truth annotation time by <b>50%</b>.</li>
+            <li>Used <b>GPT-4.5</b> and <b>Claude-3.5-Sonnet</b> with CoT and LLM-as-a-Judge to extract quality markers, improving recall by <b>30%</b> vs. traditional NLP baselines.</li>
           </ul>
-        </div>
+        </article>
 
-        <!-- Columbia AC4 -->
-        <div class="timeline-item reveal">
-          <div class="exp-head">
-            <img class="logo" src="https://logo.clearbit.com/columbia.edu"
+        <!-- Columbia -->
+        <article class="xp-card reveal">
+          <header class="xp-head">
+            <img class="xp-logo" src="https://logo.clearbit.com/columbia.edu"
                  onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Columbia_University_shield.svg/512px-Columbia_University_shield.svg.png';"
-                 alt="Columbia"/>
-            <span class="exp-title">Columbia University, Columbia Climate School, AC4 Lab — New York, NY, USA</span>
-          </div>
-          <div class="exp-role">AI & Machine Learning Researcher</div>
-          <div class="exp-meta">Aug 2024 – Present</div>
-          <ul class="list">
-            <li>Fine-tuned a <b>RoBERTa</b> model on <b>GoEmotions</b> to classify YouTube videos by emotion (respect vs. contempt), integrating <b>DeepSeek-R1</b> and <b>GPT-4o</b> for reasoning and targeting a <b>30%</b> reduction in non-peaceful watch time.</li>
-            <li>Built and deployed a cloud-based backend for a Chrome extension used to analyse YouTube watch history using <b>AWS</b> (S3, EC2), <b>LangChain</b>, and <b>YouTube APIs</b>.</li>
+                 alt="Columbia">
+            <div class="xp-meta">
+              <h3 class="xp-company">Columbia University, Columbia Climate School, AC4 Lab</h3>
+              <div class="xp-sub">New York, NY, USA • <span class="xp-role">AI & Machine Learning Researcher</span></div>
+            </div>
+            <span class="xp-badge">Aug 2024 – Present</span>
+          </header>
+          <ul class="xp-points">
+            <li>Fine-tuned <b>RoBERTa</b> on <b>GoEmotions</b> to classify video emotion (respect vs. contempt), integrating <b>DeepSeek-R1</b> & <b>GPT-4o</b> to target a <b>30%</b> drop in non-peaceful watch time.</li>
+            <li>Built a cloud backend for a Chrome extension using <b>AWS</b> (S3, EC2), <b>LangChain</b>, and <b>YouTube APIs</b>.</li>
           </ul>
-        </div>
+        </article>
 
         <!-- Morgan Stanley -->
-        <div class="timeline-item reveal">
-          <div class="exp-head">
-            <img class="logo" src="https://logo.clearbit.com/morganstanley.com"
+        <article class="xp-card reveal">
+          <header class="xp-head">
+            <img class="xp-logo" src="https://logo.clearbit.com/morganstanley.com"
                  onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Morgan_Stanley_Logo_1.svg/512px-Morgan_Stanley_Logo_1.svg.png';"
-                 alt="Morgan Stanley"/>
-            <span class="exp-title">Morgan Stanley — Bengaluru, IN</span>
-          </div>
-          <div class="exp-role">Senior Data Scientist</div>
-          <div class="exp-meta">Jan 2022 – Aug 2024</div>
-          <ul class="list">
-            <li>Spearheaded development of a <b>RAG</b>-based chatbot operating <b>LLaMA-3.1-8B-Instruct</b>, <b>all-mpnet-base-v2</b>, and NLP techniques, cutting down query resolution time by <b>60%</b> and annual ops costs by <b>30%</b>.</li>
-            <li>Improved time series forecasting by integrating <b>CNN</b>, Exponential Smoothing, and <b>Prophet</b> into a hybrid model, boosting accuracy by <b>20%</b> and enabling <b>$1M</b> in cost savings.</li>
-            <li>Orchestrated daily Machine Learning and Data Science operations, conducting Time Series Forecasting, refining algorithms, and implementing NLP techniques.</li>
-            <li>Delivered business-critical data and precise predictions by training Machine Learning models and performing critical Data Analytics tasks to manage Enterprise Data Centers, decreasing annual spend by <b>20%</b>.</li>
+                 alt="Morgan Stanley">
+            <div class="xp-meta">
+              <h3 class="xp-company">Morgan Stanley</h3>
+              <div class="xp-sub">Bengaluru, IN • <span class="xp-role">Senior Data Scientist</span></div>
+            </div>
+            <span class="xp-badge">Jan 2022 – Aug 2024</span>
+          </header>
+          <ul class="xp-points">
+            <li>Shipped a <b>RAG</b> chatbot with <b>LLaMA-3.1-8B-Instruct</b> and <b>all-mpnet-base-v2</b>, cutting query resolution time by <b>60%</b> and annual ops costs by <b>30%</b>.</li>
+            <li>Built a hybrid forecasting stack (<b>CNN</b> + Exponential Smoothing + <b>Prophet</b>) improving accuracy by <b>20%</b> and enabling <b>$1M</b> savings.</li>
+            <li>Led DS/ML ops for enterprise data centers; drove algorithmic improvements and reduced annual spend by <b>20%</b>.</li>
           </ul>
-        </div>
-
+        </article>
       </div>
     </div>
   </section>
@@ -569,13 +583,13 @@
       tick();
     })();
 
-    // Reveal on scroll (also drives timeline-dot motion)
+    // Reveal on scroll
     const io = new IntersectionObserver(entries=>{
       entries.forEach(e=>{
         if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
       });
     },{threshold:0.12});
-    document.querySelectorAll('.reveal, .timeline-item').forEach(el=>io.observe(el));
+    document.querySelectorAll('.reveal, .xp-card').forEach(el=>io.observe(el));
 
     // Chip jumps
     document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{ location.hash = '#experience'; }));
