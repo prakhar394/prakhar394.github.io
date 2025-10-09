@@ -1,6 +1,4 @@
 <!doctype html>
-<!-- -->
-<!-- Final modernized portfolio: light-first theme, glass UI, interactive logos, one-row Experience, blue GitHub buttons -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -9,7 +7,6 @@
   <meta name="description" content="Prakhar Dungarwal — MS Data Science @ Columbia. Adobe Research • Intuit • Columbia AC4 • Morgan Stanley. LLMs, Agentic AI, RAG, Applied ML." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
   <style>
     :root{
       --ink:#0b1220; --muted:#5b6576; --line:#e5eaf2; --bg:#ffffff; --accent:#2563eb; --chip:#f7f9fc;
@@ -25,9 +22,9 @@
       --glass-bg:rgba(14,22,35,.6);
       --glow:0 8px 24px rgba(138,180,255,.18);
     }
-
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
+    html{scroll-behavior:smooth}
     body{
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
       background:var(--bg); color:var(--ink); -webkit-font-smoothing:antialiased;
@@ -38,7 +35,6 @@
     a.link-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:999px}
     a.link-btn:hover{box-shadow:var(--glow)}
     a:focus,button:focus,input:focus{outline:none;box-shadow:var(--focus);border-radius:8px}
-
     .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
 
     /* NAV */
@@ -94,22 +90,22 @@
     .exp-row::-webkit-scrollbar{height:8px}
     .exp-row::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:999px}
     body.dark .exp-row::-webkit-scrollbar-thumb{background:#374151}
-    .exp-card{flex:0 0 calc(25% - 18px); /* 4 in one row */ min-width:260px}
+    .exp-card{flex:0 0 calc(25% - 18px); min-width:260px}
     @media(min-width:1200px){.exp-card{flex:0 0 calc(25% - 18px)}}
-    @media(max-width:900px){.exp-card{flex:0 0 300px}} /* still one row with horizontal scroll */
+    @media(max-width:900px){.exp-card{flex:0 0 300px}}
 
-    /* Chatbot Sidebar (glass, rounded, visually identical content) */
+    /* Chat Sidebar */
     .chat-tab{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:60;background:var(--accent);color:#fff;padding:10px 12px;border-radius:10px 0 0 10px;font-weight:800;cursor:pointer;writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:.6px;box-shadow:0 10px 26px rgba(0,0,0,.25)}
-    .sidebar{position:fixed;top:0;right:0;height:100vh;width:420px;max-width:92vw;background:var(--glass-bg);backdrop-filter:blur(16px) saturate(160%);border-left:1px solid var(--line);box-shadow:var(--shadow);transform:translateX(100%);transition:transform .32s ease;z-index:70;display:flex;flex-direction:column;border-radius:20px 0 0 20px}
+    .sidebar{position:fixed;top:0;right:0;height:100vh;width:420px;max-width:92vw;background:var(--glass-bg);backdrop-filter:blur(16px) saturate(160%);border-left:1px solid var(--line);box-shadow:0 0 24px rgba(37,99,235,.35);transform:translateX(100%);transition:transform .32s ease;z-index:70;display:flex;flex-direction:column;border-radius:20px 0 0 20px}
     .sidebar.open{transform:translateX(0)}
     .sidebar header{display:flex;align-items:center;justify-content:space-between;padding:12px;border-bottom:1px solid var(--line)}
     .side-title{display:flex;align-items:center;gap:10px;font-weight:900}
-    .side-title img{width:28px;height:28px;border-radius:50%}
+    .side-title img{width:28px;height:28px;border-radius:50%;box-shadow:0 0 18px rgba(37,99,235,.5)}
     .messages{flex:1;overflow:auto;padding:12px}
     .msg{display:flex;gap:8px;margin:8px 0}
     .a{flex-direction:row}
     .b{flex-direction:row-reverse}
-    .avatar-mini{width:28px;height:28px;border-radius:999px;border:1px solid var(--line);object-fit:cover;background:#fff}
+    .avatar-mini{width:28px;height:28px;border-radius:999px;border:1px solid var(--line);object-fit:cover;background:#fff;box-shadow:0 0 18px rgba(37,99,235,.35)}
     .bubble{max-width:78%;padding:10px 12px;border-radius:16px;border:1px solid var(--line)}
     .a .bubble{background:var(--chip)}
     .b .bubble{background:var(--accent);color:#0b1220;border-color:var(--accent)}
@@ -121,6 +117,10 @@
     .react{font-size:12px;border:1px solid var(--line);padding:4px 6px;border-radius:999px;cursor:pointer}
 
     .footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:14px;text-align:center}
+
+    /* Animations */
+    .fade-slide{opacity:0;transform:translateY(10px);animation:fadeSlide .6s ease .1s forwards}
+    @keyframes fadeSlide {to{opacity:1;transform:translateY(0)}}
   </style>
 </head>
 
@@ -140,13 +140,15 @@
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO (updated with typewriter + personal line at end) -->
   <header class="section">
     <div class="wrap">
       <div class="row row-2" style="align-items:center">
-        <div>
-          <h1 class="h1">I build AI systems that are <span style="color:var(--accent)">helpful</span>, <span style="color:var(--accent)">auditable</span> & <span style="color:var(--accent)">shippable</span>.</h1>
-          <p class="lead">Hi, I’m <b>Prakhar Dungarwal</b> — MS Data Science @ Columbia. I work on LLM-driven and agentic AI systems, evaluation pipelines, and applied ML that moves business metrics.</p>
+        <div class="fade-slide" style="text-align:center">
+          <h1 class="h1" style="font-size:46px;line-height:1.2;margin-bottom:10px;">
+            Hi, I’m <span style="color:var(--accent)">Prakhar Dungarwal</span> 👋
+          </h1>
+          <h2 id="typewriter" class="lead" style="font-size:22px;color:var(--muted);min-height:34px;"></h2>
           <div class="chips" style="margin:16px 0 8px 0">
             <span class="chip" data-intent="#experience Adobe Research">Generative AI</span>
             <span class="chip" data-intent="#experience Intuit">Agentic AI</span>
@@ -154,9 +156,9 @@
             <span class="chip" data-intent="#experience Morgan Stanley">RAG</span>
             <span class="chip" data-intent="#projects CART">CART</span>
           </div>
-          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
             <a href="#projects" class="btn primary pill"><i class="fa-solid fa-diagram-project"></i> Explore Projects</a>
-            <button class="btn pill" onclick="openChat();"><i class="fa-solid fa-robot"></i> Chat with PrakharBot</button>
+            <button class="btn pill" onclick="openChat();"><i class="fa-solid fa-robot"></i> Chat with PRK-AI</button>
           </div>
           <p class="muted" style="margin-top:10px">New York, NY • (917) 217-8276 • <a href="mailto:pd2782@columbia.edu">pd2782@columbia.edu</a></p>
           <p class="muted" style="margin-top:-4px">
@@ -164,9 +166,13 @@
             <a class="link-btn" href="https://www.datascienceportfol.io/prakhar_dungarwal" target="_blank"><i class="fa-solid fa-briefcase"></i> Portfolio</a>
             <a class="link-btn" href="https://github.com/prakhar394" target="_blank"><i class="fab fa-github"></i> GitHub</a>
           </p>
-        </div>
-        <div style="justify-self:end;text-align:center">
-          <img class="avatar" id="heroAvatar" src="/my_headhot__2_-removebg-preview.png" onerror="this.onerror=null;this.src='https://avatars.githubusercontent.com/u/14235555?v=4';" alt="Prakhar headshot"/>
+          <div style="margin-top:26px;">
+            <img class="avatar" id="heroAvatar" src="/my_headhot__2_-removebg-preview.png" onerror="this.onerror=null;this.src='https://avatars.githubusercontent.com/u/14235555?v=4';" alt="Prakhar headshot"/>
+          </div>
+          <!-- Personal line moved to end of hero -->
+          <p class="lead" style="margin-top:26px;font-size:18px;color:var(--muted);">
+            I love watching <b>F1 races</b> and playing <b>cricket</b>.
+          </p>
         </div>
       </div>
     </div>
@@ -174,7 +180,7 @@
 
   <div class="divider"></div>
 
-  <!-- PROJECTS -->
+  <!-- PROJECTS (unchanged content) -->
   <section id="projects" class="section">
     <div class="wrap">
       <h2 class="title">Data Science Projects</h2>
@@ -241,7 +247,7 @@
 
   <div class="divider"></div>
 
-  <!-- SKILLS -->
+  <!-- SKILLS (unchanged content) -->
   <section id="skills" class="section">
     <div class="wrap">
       <h2 class="title">Skills & Interests</h2>
@@ -310,25 +316,22 @@
           <img src="https://img.shields.io/badge/Caffe-DB4437?style=for-the-badge&logo=google&logoColor=white" alt="Caffe"/>
         </div>
       </div>
-
     </div>
   </section>
-  
+
   <div class="divider"></div>
 
-  <!-- EXPERIENCE (forced single row with logos, slightly trimmed) -->
   <!-- EXPERIENCE -->
   <section id="experience" class="section">
     <div class="wrap">
       <h2 class="title">Work Experience</h2>
-  
       <div class="grid" style="display:flex;flex-wrap:nowrap;gap:20px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;">
         <!-- Adobe Research -->
-        <div class="card" id="Adobe" style="min-width:260px;flex:1;transition:transform .3s,box-shadow .3s;">
+        <div class="card" id="Adobe" style="min-width:260px;flex:1;">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
             <img class="logo" src="https://blog.adobe.com/en/publish/2020/05/28/media_1d87bf78b1ce19defbef0c7858b4df696215a4048.png?width=750&format=png&optimize=medium" 
                  onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Adobe_Systems_logo_and_wordmark.svg/512px-Adobe_Systems_logo_and_wordmark.svg.png';" 
-                 alt="Adobe" style="transition:transform .3s,filter .3s;cursor:pointer;">
+                 alt="Adobe">
             <h3 style="margin:0">Adobe Research — Generative AI Researcher</h3>
           </div>
           <div class="muted">Aug 2025 – Present • New York, NY, USA</div>
@@ -337,13 +340,12 @@
             <li>Built automated <b>MLLM-as-a-Judge</b> pipelines leveraging <b>RAG</b> and reasoning traces, improving model judgment accuracy by <b>20%</b>.</li>
           </ul>
         </div>
-  
         <!-- Intuit -->
-        <div class="card" id="Intuit" style="min-width:260px;flex:1;transition:transform .3s,box-shadow .3s;">
+        <div class="card" id="Intuit" style="min-width:260px;flex:1;">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
             <img class="logo" src="https://logo.clearbit.com/intuit.com" 
                  onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Intuit_Logo.svg/512px-Intuit_Logo.svg.png';" 
-                 alt="Intuit" style="transition:transform .3s,filter .3s;cursor:pointer;">
+                 alt="Intuit">
             <h3 style="margin:0">Intuit — AI & Data Science Intern</h3>
           </div>
           <div class="muted">May 2025 – Aug 2025 • Mountain View, CA, USA</div>
@@ -352,13 +354,12 @@
             <li>Used <b>GPT-4.5</b> and <b>Claude-3.5-Sonnet</b> with CoT evaluation, improving recall by <b>30%</b>.</li>
           </ul>
         </div>
-  
         <!-- Columbia AC4 -->
-        <div class="card" id="Columbia" style="min-width:260px;flex:1;transition:transform .3s,box-shadow .3s;">
+        <div class="card" id="Columbia" style="min-width:260px;flex:1;">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
             <img class="logo" src="https://logo.clearbit.com/columbia.edu" 
                  onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Columbia_University_shield.svg/512px-Columbia_University_shield.svg.png';" 
-                 alt="Columbia University" style="transition:transform .3s,filter .3s;cursor:pointer;">
+                 alt="Columbia University">
             <h3 style="margin:0">Columbia University (AC4 Lab) — AI & ML Researcher</h3>
           </div>
           <div class="muted">Aug 2024 – Present • New York, NY, USA</div>
@@ -367,13 +368,12 @@
             <li>Built a backend with <b>AWS</b> (S3, EC2), <b>LangChain</b>, and YouTube APIs for Chrome extension analysis.</li>
           </ul>
         </div>
-  
         <!-- Morgan Stanley -->
-        <div class="card" id="MorganStanley" style="min-width:260px;flex:1;transition:transform .3s,box-shadow .3s;">
+        <div class="card" id="MorganStanley" style="min-width:260px;flex:1;">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
             <img class="logo" src="https://logo.clearbit.com/morganstanley.com" 
                  onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Morgan_Stanley_Logo_1.svg/512px-Morgan_Stanley_Logo_1.svg.png';" 
-                 alt="Morgan Stanley" style="transition:transform .3s,filter .3s;cursor:pointer;">
+                 alt="Morgan Stanley">
             <h3 style="margin:0">Morgan Stanley — Senior Data Scientist</h3>
           </div>
           <div class="muted">Jan 2022 – Aug 2024 • Bengaluru, IN</div>
@@ -437,30 +437,30 @@
     <div class="wrap">© <span id="year"></span> Prakhar Dungarwal • Interactive portfolio • GitHub Pages ready</div>
   </footer>
 
-  <!-- Floating Chat Sidebar (visual polish only) -->
-  <div class="chat-tab" id="chatTab" onclick="openChat()">Chat with PrakharBot</div>
+  <!-- Floating Chat Sidebar renamed to PRK-AI -->
+  <div class="chat-tab" id="chatTab" onclick="openChat()">Chat with PRK-AI</div>
   <aside class="sidebar" id="sidebar" aria-live="polite">
     <header>
       <div class="side-title">
-        <img id="sideAvatar" src="/mnt/data/Gemini_Generated_Image_ao7jyiao7jyiao7j.png" onerror="this.onerror=null;this.src='https://avatars.githubusercontent.com/u/14235555?v=4';" alt="avatar"/>
+        <img id="sideAvatar" src="https://avatars.githubusercontent.com/u/14235555?v=4" alt="avatar"/>
         <div>
-          PrakharBot<br><span class="status muted">online • resume-aware</span>
+          PRK-AI — Personal Knowledge Agent<br><span class="status muted">online • resume-aware</span>
         </div>
       </div>
       <button class="btn-toggle" onclick="closeChat()" aria-label="Close chat">✕</button>
     </header>
     <div class="messages" id="messages">
       <div class="msg a">
-        <img class="avatar-mini" src="/mnt/data/Gemini_Generated_Image_ao7jyiao7jyiao7j.png" onerror="this.onerror=null;this.src='https://avatars.githubusercontent.com/u/14235555?v=4';" alt="mini-prakhar"/>
-        <div class="bubble">Hey! I’m a friendly mini-bot trained on my resume. Ask about <b>Adobe</b>, <b>Intuit</b>, <b>Columbia</b>, <b>Morgan&nbsp;Stanley</b>, <b>skills</b>, or <b>projects</b>.</div>
+        <img class="avatar-mini" src="https://avatars.githubusercontent.com/u/14235555?v=4" alt="mini-prakhar"/>
+        <div class="bubble"><b>PRK-AI:</b> Hello! I’m Prakhar’s personal knowledge agent. Ask about his work at <b>Adobe</b>, <b>Intuit</b>, <b>Columbia</b>, <b>Morgan&nbsp;Stanley</b>, <b>skills</b>, or <b>projects</b>.</div>
       </div>
       <div class="msg a">
-        <img class="avatar-mini" src="/mnt/data/Gemini_Generated_Image_ao7jyiao7jyiao7j.png" onerror="this.onerror=null;this.src='https://avatars.githubusercontent.com/u/14235555?v=4';" alt="mini-prakhar"/>
+        <img class="avatar-mini" src="https://avatars.githubusercontent.com/u/14235555?v=4" alt="mini-prakhar"/>
         <div class="bubble">Shortcuts: <span class="pill-suggest" onclick="send('Adobe Research')">Adobe Research</span> <span class="pill-suggest" onclick="send('Intuit intern')">Intuit</span> <span class="pill-suggest" onclick="send('Columbia AC4')">Columbia AC4</span> <span class="pill-suggest" onclick="send('Morgan Stanley (RAG)')">Morgan Stanley</span> <span class="pill-suggest" onclick="send('Show skills')">Skills</span> <span class="pill-suggest" onclick="send('Show projects')">Projects</span></div>
       </div>
     </div>
     <footer>
-      <input id="chatInput" placeholder="Ask anything… (e.g., How did you boost 40% accuracy?)" onkeydown="if(event.key==='Enter'){send(this.value); this.value='';}" />
+      <input id="chatInput" placeholder="Ask about Prakhar’s experience, skills, or projects…" onkeydown="if(event.key==='Enter'){send(this.value); this.value='';}" />
       <button class="btn primary pill" onclick="const i=document.getElementById('chatInput'); send(i.value); i.value='';">Send</button>
     </footer>
   </aside>
@@ -474,13 +474,29 @@
     (function initTheme(){
       const saved = localStorage.getItem('theme');
       if(saved==='dark'){ document.body.classList.add('dark'); toggle.textContent='🌙'; }
-      else { document.body.classList.remove('dark'); toggle.textContent='🌞'; } // default light
+      else { document.body.classList.remove('dark'); toggle.textContent='🌞'; }
     })();
     toggle.addEventListener('click',()=>{
       const isDark = document.body.classList.toggle('dark');
       toggle.textContent = isDark ? '🌙' : '🌞';
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
+
+    // Typewriter roles (per your request)
+    const roles = ["Data Scientist", "AI Engineer", "Machine Learning Engineer", "LLM Enthusiast", "F1 Fanatic"];
+    (function typewriterInit(){
+      const el = document.getElementById("typewriter");
+      let i=0, j=0, del=false;
+      const speed=100, hold=1500;
+      function tick(){
+        const t = roles[i];
+        el.textContent = t.substring(0, j);
+        if(!del && j++ === t.length){ del=true; return setTimeout(tick, hold); }
+        if(del && j-- === 0){ del=false; i=(i+1)%roles.length; return setTimeout(tick, 300); }
+        setTimeout(tick, del ? 50 : speed);
+      }
+      tick();
+    })();
 
     // Intent chips: section jump + optional prompt
     function parseIntent(intent){
@@ -494,35 +510,20 @@
       if(prompt){ openChat(); send(prompt); }
     }));
 
-    // Chat sidebar open/close (fixed onclick)
+    // Chat sidebar open/close
     const sidebar = document.getElementById('sidebar');
     const chatTab = document.getElementById('chatTab');
     function openChat(){ sidebar.classList.add('open'); chatTab.style.display='none'; setTimeout(()=>document.getElementById('chatInput').focus(),60); }
     function closeChat(){ sidebar.classList.remove('open'); chatTab.style.display='block'; }
     window.openChat = openChat; window.closeChat = closeChat;
 
-    // Tiny emoji spark effect
-    function spark(el){
-      const star=document.createElement('div'); star.textContent='✨';
-      star.style.position='absolute'; star.style.pointerEvents='none';
-      const r = el.getBoundingClientRect();
-      star.style.left = (r.left + r.width/2)+'px'; star.style.top=(r.top-8)+'px';
-      star.style.transition='all .8s ease'; star.style.transform='translateY(0)'; star.style.opacity='1';
-      document.body.appendChild(star);
-      requestAnimationFrame(()=>{ star.style.transform='translateY(-30px)'; star.style.opacity='0'; });
-      setTimeout(()=>star.remove(),820);
-    }
-    window.spark = spark;
-
-    // Chat engine (VISUALLY IDENTICAL content/logic)
+    // Chat engine (third-person tone)
     const M = document.getElementById('messages');
-    const AVATAR_PRAKHAR = '/mnt/data/Gemini_Generated_Image_ao7jyiao7jyiao7j.png';
-    const AVATAR_PRAKHAR_FALLBACK = 'https://avatars.githubusercontent.com/u/14235555?v=4';
+    const AVATAR_PRAKHAR = 'https://avatars.githubusercontent.com/u/14235555?v=4';
     const AVATAR_ROBOT = 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f916.svg';
 
     function avatar(src){
       const i=document.createElement('img'); i.className='avatar-mini'; i.src=src;
-      i.onerror=()=>{ if(src===AVATAR_PRAKHAR) i.src=AVATAR_PRAKHAR_FALLBACK; };
       return i;
     }
     function append(role, html){
@@ -533,10 +534,9 @@
       else { row.appendChild(img); row.appendChild(b); }
       M.appendChild(row); M.scrollTop = M.scrollHeight;
     }
-
     function send(text){
       const q = (text||'').trim(); if(!q) return; append('user', q);
-      const it = document.createElement('div'); it.className='typing muted'; it.textContent='typing…'; M.appendChild(it); M.scrollTop=M.scrollHeight;
+      const it = document.createElement('div'); it.className='typing muted'; it.textContent='PRK-AI is typing…'; M.appendChild(it); M.scrollTop=M.scrollHeight;
       setTimeout(()=>{ M.removeChild(it); respond(q); }, 420);
     }
     window.send = send;
@@ -544,35 +544,35 @@
     function respond(q){
       const t = q.toLowerCase();
       if(t.includes('adobe')){
-        append('bot', '<b>Adobe Research — Generative AI Researcher</b><ul><li>Personalized multimodal LLMs with <b>GPT-4o-v</b> & <b>LLaVA</b>; 10+ eval factors → <b>95% consistency</b>.</li><li>Automated <b>MLLM-as-a-Judge</b> with <b>RAG</b>, reasoning traces, agentic tool binding → accuracy ↑ <b>20%</b>.</li></ul>');
+        append('bot', '<b>Adobe Research — Generative AI Researcher</b><ul><li>He developed personalized multimodal LLMs with <b>GPT-4o-v</b> & <b>LLaVA</b>, achieving strong cross-dataset consistency.</li><li>He built automated <b>MLLM-as-a-Judge</b> pipelines with <b>RAG</b> and reasoning traces that improved judgment accuracy.</li></ul>');
         return;
       }
       if(t.includes('intuit')){
-        append('bot', '<b>Intuit — AI & Data Science Intern (May 2025 – Aug 2025)</b><ul><li>Agentic AI with <b>LangGraph</b> + <b>ReAct</b> → ground-truth annotation time ↓ <b>50%</b>.</li><li>Used <b>GPT-4.5</b> & <b>Claude-3.5-Sonnet</b> with CoT + LLM-as-a-Judge → recall ↑ <b>30%</b>.</li></ul>');
+        append('bot', '<b>Intuit — AI & Data Science Intern</b><ul><li>He built an agentic framework using <b>LangGraph</b> + <b>ReAct</b> that reduced annotation time.</li><li>He used <b>GPT-4.5</b> and <b>Claude-3.5-Sonnet</b> with CoT + judge-based evals for quality gains.</li></ul>');
         return;
       }
       if(t.includes('columbia')||t.includes('ac4')){
-        append('bot','<b>Columbia University (AC4 Lab) — AI & ML Researcher</b><ul><li>Fine-tuned <b>RoBERTa</b> on <b>GoEmotions</b>; integrated <b>DeepSeek-R1</b> & <b>GPT-4o</b> → target <b>30%</b> drop in non-peaceful watch time.</li><li>Cloud backend for a Chrome extension using <b>AWS</b> (S3, EC2), <b>LangChain</b>, and YouTube APIs.</li></ul>');
+        append('bot','<b>Columbia University (AC4 Lab) — AI & ML Researcher</b><ul><li>He fine-tuned <b>RoBERTa</b> on <b>GoEmotions</b> and integrated <b>DeepSeek-R1</b> & <b>GPT-4o</b> for safer recommendations.</li><li>He engineered a cloud backend with <b>AWS</b>, <b>LangChain</b>, and YouTube APIs.</li></ul>');
         return;
       }
       if(t.includes('morgan')){
-        append('bot','<b>Morgan Stanley — Senior Data Scientist (Jan 2022 – Aug 2024)</b><ul><li><b>RAG</b> chatbot (<b>LLaMA-3.1-8B-Instruct</b>, <b>all-mpnet-base-v2</b>) → query resolution ↓ <b>60%</b>, ops cost ↓ <b>30%</b>.</li><li>Hybrid <b>CNN + Exponential Smoothing + Prophet</b> forecasting → accuracy ↑ <b>20%</b> (~ <b>$1M</b> savings).</li><li>Enterprise data-center analytics → annual spend ↓ <b>20%</b>.</li></ul>');
+        append('bot','<b>Morgan Stanley — Senior Data Scientist</b><ul><li>He built a <b>RAG</b> chatbot with <b>LLaMA-3.1-8B-Instruct</b> and <b>mpnet</b> embeddings for operations.</li><li>He combined <b>CNN</b> + <b>Prophet</b> for forecasting improvements with notable cost savings.</li></ul>');
         return;
       }
       if(t.includes('skills')){
-        append('bot','<b>Skills</b><ul><li><b>Programming & Tools:</b> Python, SQL, R, C, C++, Go, Docker, Git, Streamlit, AWS, Azure, Snowpark, Pandas, NumPy</li><li><b>Specialized Techniques:</b> Machine Learning, AI Agents, Reinforcement Learning, LLMs, A/B Testing, RAG, Generative AI</li><li><b>LLM Tools & Frameworks:</b> LangChain, LlamaIndex, OpenAI API, Hugging Face, ChromaDB, FAISS, Streamlit, Transformer</li><li><b>ML Frameworks:</b> PyTorch, TensorFlow, scikit-learn, Keras, Random Forest, XGBoost, PySpark, JAX, MLFlow, MLOps, Caffe</li></ul>');
+        append('bot','<b>Skills</b><ul><li><b>Programming:</b> Python, SQL, R, C/C++, Go</li><li><b>LLM/Agents:</b> LangChain, LlamaIndex, RAG, evaluation</li><li><b>ML:</b> PyTorch, TensorFlow, scikit-learn, XGBoost</li><li><b>Cloud & MLOps:</b> AWS, Azure, MLflow, Docker</li></ul>');
         return;
       }
       if(t.includes('project')||t.includes('cinegraph')||t.includes('cart')){
-        append('bot','<b>Projects</b><ul><li><b>CineGraphRAG — MCP Agent:</b> NL → Cypher, explainable subgraphs; accuracy ↑ <b>40%</b>, speed <b>3×</b>; relevance ↑ <b>25%</b>.</li><li><b>CART — Context-Aware Rendition:</b> QA chatbot; fuzzy matching + cosine similarity; speed ↑ <b>30%</b>; fine-tuned on QA LLMs.</li></ul>');
+        append('bot','<b>Projects</b><ul><li><b>CineGraphRAG:</b> NL→Cypher with Neo4j MCP for explainable recommendations.</li><li><b>CART:</b> Context-aware QA using fuzzy matching + cosine similarity for faster retrieval.</li></ul>');
         return;
       }
       if(t.includes('education')){
-        append('bot','<b>Education</b><ul><li><b>Columbia University:</b> M.S. Data Science (GPA 3.8/4), Aug 2024 – Dec 2025 — Applied ML, DL for NLP, Probability & Statistics, LLM-Based Gen AI, Causal Inference.</li><li><b>VIT:</b> B.Tech CSE (GPA 3.96/4), Jul 2018 – Jul 2022 — DSA, Computer Architecture, Parallel & Distributed Computing, AI, Robotics.</li></ul>');
+        append('bot','<b>Education</b><ul><li><b>Columbia University:</b> M.S. Data Science.</li><li><b>VIT:</b> B.Tech CSE with strong CS fundamentals.</li></ul>');
         return;
       }
       if(t.includes('contact')||t.includes('email')){ append('bot','New York, NY • <a href="mailto:pd2782@columbia.edu">pd2782@columbia.edu</a> • (917) 217-8276'); return; }
-      append('bot','Try asking about <b>Adobe</b>, <b>Intuit</b>, <b>Columbia AC4</b>, <b>Morgan Stanley</b>, <b>skills</b>, or <b>projects</b>.');
+      append('bot','You can ask about <b>Adobe</b>, <b>Intuit</b>, <b>Columbia AC4</b>, <b>Morgan Stanley</b>, <b>skills</b>, or <b>projects</b>.');
     }
   </script>
 </body>
